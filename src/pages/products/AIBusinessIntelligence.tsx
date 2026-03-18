@@ -1,5 +1,8 @@
 import { Bot } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
+import imgSolves from "@/assets/visuals/intelligence-insight.jpg";
+import imgIncludes from "@/assets/visuals/digital-infrastructure.jpg";
+import imgMatters from "@/assets/visuals/about-mission.jpg";
 
 const AIBusinessIntelligence = () => (
   <ProductPageTemplate
@@ -13,18 +16,21 @@ const AIBusinessIntelligence = () => (
         content: "Insurers often sit on large amounts of operational, claims, sales, servicing, and distribution data but lack a clean way to turn it into usable insight. This leads to slower decisions, weak visibility, and missed optimization opportunities.",
         icon: Bot,
         visual: "right",
+        image: imgSolves,
       },
       {
         heading: "What it includes",
         items: ["Performance dashboards", "Operational analytics", "Claims and servicing visibility", "Sales and pipeline reporting", "Trend identification", "AI-assisted insight generation", "Management decision support"],
         icon: Bot,
         visual: "left",
+        image: imgIncludes,
       },
       {
         heading: "Why it matters",
         content: "Better reporting is useful. Better insight is transformational. This product helps leadership teams move from static reporting to dynamic operational intelligence so decisions can be faster, sharper, and more grounded in actual business movement.",
         icon: Bot,
         visual: "right",
+        image: imgMatters,
       },
     ]}
     relatedLinks={[

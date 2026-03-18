@@ -1,4 +1,8 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
+import imgSolves from "@/assets/visuals/tech-development.jpg";
+import imgIncludes from "@/assets/visuals/digital-infrastructure.jpg";
+import imgMatters from "@/assets/visuals/workflows-coordination.jpg";
+
 const AppTechDevelopment = () => (
   <SolutionPageTemplate
     heading="App & Tech Development"
@@ -6,6 +10,7 @@ const AppTechDevelopment = () => (
     whatItSolves="Insurers need digital tools that fit insurance workflows rather than generic software forced into insurance later."
     whatItIncludes="Web portals, mobile apps, self-service tools, admin panels, digital onboarding, policy flows, claims interfaces, and modular platform components."
     whyItMatters="Technology becomes more usable, more relevant, and faster to deploy around real insurance operations."
+    images={{ solves: imgSolves, includes: imgIncludes, matters: imgMatters }}
   />
 );
 export default AppTechDevelopment;

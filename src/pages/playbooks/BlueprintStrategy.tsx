@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { Map } from "lucide-react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
+import imgVisual from "@/assets/visuals/blueprint-strategy.jpg";
 
 const BlueprintStrategy = () => (
   <Layout>
@@ -22,9 +22,15 @@ const BlueprintStrategy = () => (
               ))}
             </ul>
           </motion.div>
-          <div className="bg-card-mint rounded-2xl aspect-[4/3] flex items-center justify-center">
-            <Map className="w-20 h-20 text-primary/30" />
-          </div>
+          <motion.div
+            className="rounded-2xl aspect-[4/3] overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <img src={imgVisual} alt="Blueprint & Strategy visual" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
+          </motion.div>
         </div>
       </div>
     </section>

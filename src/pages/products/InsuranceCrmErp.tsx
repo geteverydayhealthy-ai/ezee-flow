@@ -1,5 +1,8 @@
 import { Users } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
+import imgSolves from "@/assets/visuals/crm-operations.jpg";
+import imgIncludes from "@/assets/visuals/workflows-coordination.jpg";
+import imgMatters from "@/assets/visuals/intelligence-insight.jpg";
 
 const InsuranceCrmErp = () => (
   <ProductPageTemplate
@@ -13,18 +16,21 @@ const InsuranceCrmErp = () => (
         content: "Insurance teams often work across spreadsheets, chats, email chains, disconnected CRMs, and manual trackers. This creates visibility gaps, missed follow-ups, inconsistent servicing, and weak reporting discipline. Insurance CRM + ERP brings these activities into one connected operational environment.",
         icon: Users,
         visual: "right",
+        image: imgSolves,
       },
       {
         heading: "What it includes",
         items: ["Lead and customer management", "Team task assignment", "Pipeline visibility", "Servicing workflow tracking", "Operational dashboards", "Reporting discipline", "Insurer-specific process configuration"],
         icon: Users,
         visual: "left",
+        image: imgIncludes,
       },
       {
         heading: "Why it matters",
         content: "This is not a generic CRM adapted later for insurance. It is designed around how insurance teams actually work across sales, renewals, servicing, documentation, coordination, and accountability.",
         icon: Users,
         visual: "right",
+        image: imgMatters,
       },
     ]}
     relatedLinks={[

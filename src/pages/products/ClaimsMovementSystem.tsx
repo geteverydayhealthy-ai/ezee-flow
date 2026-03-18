@@ -1,5 +1,8 @@
 import { Eye } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
+import imgSolves from "@/assets/visuals/claims-movement.jpg";
+import imgIncludes from "@/assets/visuals/workflows-coordination.jpg";
+import imgMatters from "@/assets/visuals/governance-control.jpg";
 
 const ClaimsMovementSystem = () => (
   <ProductPageTemplate
@@ -13,18 +16,21 @@ const ClaimsMovementSystem = () => (
         content: "Claims are one of the most sensitive moments in insurance, but they are often managed through fragmented emails, manual updates, and unclear internal movement. This creates poor customer experience and slow internal coordination. Claims Movement System brings structure to the full claims journey.",
         icon: Eye,
         visual: "right",
+        image: imgSolves,
       },
       {
         heading: "What it includes",
         items: ["FNOL capture", "Claims intake workflows", "Internal routing and assignment", "Document tracking", "Status visibility", "Customer update flows", "Turnaround monitoring"],
         icon: Eye,
         visual: "left",
+        image: imgIncludes,
       },
       {
         heading: "Why it matters",
         content: "Claims handling should not feel opaque or chaotic. This system helps insurers improve both internal control and customer trust by making claims movement visible, trackable, and manageable.",
         icon: Eye,
         visual: "right",
+        image: imgMatters,
       },
     ]}
     relatedLinks={[
