@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { ArrowRight, LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
@@ -18,6 +17,7 @@ interface ProductPageProps {
     items?: string[];
     visual?: "left" | "right";
     icon?: LucideIcon;
+    image?: string;
   }[];
   outcomeLine?: string;
   relatedLinks: { label: string; href: string }[];
@@ -79,8 +79,14 @@ const ProductPageTemplate = ({
                 )}
               </div>
               <div className={`${section.visual === "left" ? "lg:order-1" : ""}`}>
-                <div className="bg-accent rounded-2xl aspect-[4/3] flex items-center justify-center">
-                  {section.icon && <section.icon className="w-20 h-20 text-primary/30" />}
+                <div className="rounded-2xl aspect-[4/3] overflow-hidden">
+                  {section.image ? (
+                    <img src={section.image} alt={section.heading} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
+                  ) : (
+                    <div className="bg-accent w-full h-full flex items-center justify-center rounded-2xl">
+                      {section.icon && <section.icon className="w-20 h-20 text-primary/30" />}
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

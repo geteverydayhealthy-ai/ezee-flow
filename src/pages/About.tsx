@@ -3,6 +3,7 @@ import { Zap, Settings, Shield, Layers, Eye, Target } from "lucide-react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
+import imgMission from "@/assets/visuals/about-mission.jpg";
 
 const principles = [
   { icon: Zap, title: "Fastest go-to-market" },
@@ -22,13 +23,24 @@ const About = () => (
     />
 
     <section className="section-spacing bg-accent/50">
-      <div className="section-container max-w-3xl mx-auto">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Who we are</h2>
-          <p className="text-muted-foreground leading-relaxed text-center">
-            Ezee Technologies is an insurance-native technology and execution company. We help insurers modernize customer journeys, distribution, workflows, governance, and intelligence through configurable infrastructure built around insurer requirements.
-          </p>
-        </motion.div>
+      <div className="section-container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-6">Who we are</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Ezee Technologies is an insurance-native technology and execution company. We help insurers modernize customer journeys, distribution, workflows, governance, and intelligence through configurable infrastructure built around insurer requirements.
+            </p>
+          </motion.div>
+          <motion.div
+            className="rounded-2xl aspect-[4/3] overflow-hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <img src={imgMission} alt="Ezee Technologies mission" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
+          </motion.div>
+        </div>
       </div>
     </section>
 

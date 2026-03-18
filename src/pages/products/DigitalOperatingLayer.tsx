@@ -1,5 +1,8 @@
-import { Layers, Workflow, Shield, BarChart3 } from "lucide-react";
+import { Layers, Workflow, Shield } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
+import imgSolves from "@/assets/visuals/digital-infrastructure.jpg";
+import imgIncludes from "@/assets/visuals/acquisition-journey.jpg";
+import imgMatters from "@/assets/visuals/governance-control.jpg";
 
 const DigitalOperatingLayer = () => (
   <ProductPageTemplate
@@ -13,6 +16,7 @@ const DigitalOperatingLayer = () => (
         content: "Most insurers are constrained by legacy systems, fragmented data, manual workflows, and disconnected partner infrastructure. Replacing everything at once is expensive, slow, and risky. The Digital Operating Layer provides a smarter path: modernize what matters, connect what exists, and create a scalable foundation for future growth.",
         icon: Layers,
         visual: "right",
+        image: imgSolves,
       },
       {
         heading: "What it enables",
@@ -26,12 +30,14 @@ const DigitalOperatingLayer = () => (
         ],
         icon: Workflow,
         visual: "left",
+        image: imgIncludes,
       },
       {
         heading: "Built for insurer reality",
         content: "The Digital Operating Layer is designed to adapt around insurer requirements instead of forcing insurers into rigid software. It supports business-specific workflows, product-level configuration, governance controls, approval logic, distribution variations, and insurer-specific operational structures.",
         icon: Shield,
         visual: "right",
+        image: imgMatters,
       },
     ]}
     relatedLinks={[
