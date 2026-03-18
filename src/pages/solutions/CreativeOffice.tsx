@@ -1,7 +1,7 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import imgSolves from "@/assets/visuals/creative-communication.jpg";
-import imgIncludes from "@/assets/visuals/acquisition-journey.jpg";
-import imgMatters from "@/assets/visuals/performance-growth.jpg";
+import imgSolves from "@/assets/visuals/v2-creative-design.jpg";
+import imgIncludes from "@/assets/visuals/v2-happy-team.jpg";
+import imgMatters from "@/assets/visuals/v2-growth-marketing.jpg";
 
 const CreativeOffice = () => (
   <SolutionPageTemplate

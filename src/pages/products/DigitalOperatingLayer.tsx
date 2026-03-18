@@ -1,8 +1,8 @@
 import { Layers, Workflow, Shield } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
-import imgSolves from "@/assets/visuals/digital-infrastructure.jpg";
-import imgIncludes from "@/assets/visuals/acquisition-journey.jpg";
-import imgMatters from "@/assets/visuals/governance-control.jpg";
+import imgSolves from "@/assets/visuals/v2-digital-infrastructure.jpg";
+import imgIncludes from "@/assets/visuals/v2-team-collaboration.jpg";
+import imgMatters from "@/assets/visuals/v2-governance-shield.jpg";
 
 const DigitalOperatingLayer = () => (
   <ProductPageTemplate

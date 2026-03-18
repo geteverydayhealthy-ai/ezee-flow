@@ -1,7 +1,7 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import imgSolves from "@/assets/visuals/tech-development.jpg";
-import imgIncludes from "@/assets/visuals/digital-infrastructure.jpg";
-import imgMatters from "@/assets/visuals/workflows-coordination.jpg";
+import imgSolves from "@/assets/visuals/v2-app-development.jpg";
+import imgIncludes from "@/assets/visuals/v2-digital-infrastructure.jpg";
+import imgMatters from "@/assets/visuals/v2-team-collaboration.jpg";
 
 const AppTechDevelopment = () => (
   <SolutionPageTemplate

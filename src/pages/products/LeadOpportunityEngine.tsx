@@ -1,8 +1,8 @@
 import { Target } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
-import imgSolves from "@/assets/visuals/lead-conversion.jpg";
-import imgIncludes from "@/assets/visuals/acquisition-journey.jpg";
-import imgMatters from "@/assets/visuals/performance-growth.jpg";
+import imgSolves from "@/assets/visuals/v2-lead-funnel.jpg";
+import imgIncludes from "@/assets/visuals/v2-growth-marketing.jpg";
+import imgMatters from "@/assets/visuals/v2-analytics-visibility.jpg";
 
 const LeadOpportunityEngine = () => (
   <ProductPageTemplate
