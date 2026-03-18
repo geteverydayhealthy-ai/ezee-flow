@@ -1,8 +1,8 @@
 import { Bot } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
-import imgSolves from "@/assets/visuals/intelligence-insight.jpg";
-import imgIncludes from "@/assets/visuals/digital-infrastructure.jpg";
-import imgMatters from "@/assets/visuals/about-mission.jpg";
+import imgSolves from "@/assets/visuals/v2-ai-automation.jpg";
+import imgIncludes from "@/assets/visuals/v2-digital-infrastructure.jpg";
+import imgMatters from "@/assets/visuals/v2-transformation.jpg";
 
 const AIBusinessIntelligence = () => (
   <ProductPageTemplate

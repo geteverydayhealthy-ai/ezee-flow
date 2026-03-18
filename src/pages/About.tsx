@@ -3,7 +3,7 @@ import { Zap, Settings, Shield, Layers, Eye, Target } from "lucide-react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
-import imgMission from "@/assets/visuals/about-mission.jpg";
+import imgMission from "@/assets/visuals/v2-happy-team.jpg";
 
 const principles = [
   { icon: Zap, title: "Fastest go-to-market" },
@@ -38,7 +38,7 @@ const About = () => (
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <img src={imgMission} alt="Ezee Technologies mission" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
+            <img src={imgMission} alt="Ezee Technologies team" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
           </motion.div>
         </div>
       </div>

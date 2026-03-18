@@ -1,8 +1,8 @@
 import { Users } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
-import imgSolves from "@/assets/visuals/crm-operations.jpg";
-import imgIncludes from "@/assets/visuals/workflows-coordination.jpg";
-import imgMatters from "@/assets/visuals/intelligence-insight.jpg";
+import imgSolves from "@/assets/visuals/v2-crm-team.jpg";
+import imgIncludes from "@/assets/visuals/v2-backoffice-ops.jpg";
+import imgMatters from "@/assets/visuals/v2-trust-partnership.jpg";
 
 const InsuranceCrmErp = () => (
   <ProductPageTemplate

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
-import imgVisual from "@/assets/visuals/embedded-insurance.jpg";
+import imgVisual from "@/assets/visuals/v2-embedded-ecosystem.jpg";
 
 const EmbeddedInsurance = () => (
   <Layout>
@@ -29,7 +29,7 @@ const EmbeddedInsurance = () => (
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <img src={imgVisual} alt="Embedded Insurance visual" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
+            <img src={imgVisual} alt="Embedded Insurance Infrastructure" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
           </motion.div>
         </div>
       </div>

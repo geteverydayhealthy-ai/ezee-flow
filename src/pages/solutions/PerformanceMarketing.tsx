@@ -1,7 +1,7 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import imgSolves from "@/assets/visuals/performance-growth.jpg";
-import imgIncludes from "@/assets/visuals/lead-conversion.jpg";
-import imgMatters from "@/assets/visuals/intelligence-insight.jpg";
+import imgSolves from "@/assets/visuals/v2-lead-funnel.jpg";
+import imgIncludes from "@/assets/visuals/v2-analytics-visibility.jpg";
+import imgMatters from "@/assets/visuals/v2-intelligence-insight.jpg";
 
 const PerformanceMarketing = () => (
   <SolutionPageTemplate
