@@ -6,6 +6,7 @@ import imgMatters from "@/assets/visuals/v5-lead-analytics.jpg";
 
 const LeadOpportunityEngine = () => (
   <ProductPageTemplate
+    pageSlug="lead-opportunity-engine"
     seoTitle="Lead & Opportunity Engine for Insurance | Ezee Technologies"
     heading="Lead & Opportunity Engine"
     subheading="A demand management system built for insurance distribution, conversion, routing, and follow-through. Because leads are only valuable when they are captured properly, routed quickly, and moved through a defined conversion process."

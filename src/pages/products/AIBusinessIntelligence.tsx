@@ -6,6 +6,7 @@ import imgMatters from "@/assets/visuals/v5-ai-transform.jpg";
 
 const AIBusinessIntelligence = () => (
   <ProductPageTemplate
+    pageSlug="ai-business-intelligence"
     seoTitle="AI-enabled Business Intelligence & Analytics for Insurance | Ezee Technologies"
     heading="AI-enabled Business Intelligence & Analytics"
     subheading="A decision-support layer that turns insurance operational data into actionable insight, performance visibility, and smarter business decisions across the entire value chain."

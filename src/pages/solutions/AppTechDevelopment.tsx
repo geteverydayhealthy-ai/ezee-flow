@@ -5,6 +5,7 @@ import imgMatters from "@/assets/visuals/v5-apptech-launch.jpg";
 
 const AppTechDevelopment = () => (
   <SolutionPageTemplate
+    pageSlug="app-tech-development"
     heading="App & Tech Development"
     subheading="Insurance-native product design and engineering for customer journeys, portals, apps, and internal systems. Built around how insurance actually works, not adapted from generic frameworks."
     whatItSolves="Insurers need digital tools that fit insurance workflows, compliance requirements, and customer expectations. Off-the-shelf solutions often lack the domain-specific logic that insurance operations demand: policy-aware customer portals, claims-integrated servicing tools, compliance-aligned onboarding flows, and multi-role admin panels. The App & Tech Development pod designs and builds insurance-native digital products from the ground up, ensuring every platform and application reflects real insurance operational needs."

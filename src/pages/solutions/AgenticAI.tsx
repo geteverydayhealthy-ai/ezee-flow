@@ -5,6 +5,7 @@ import imgMatters from "@/assets/visuals/v5-agentic-leadership.jpg";
 
 const AgenticAI = () => (
   <SolutionPageTemplate
+    pageSlug="agentic-ai"
     heading="Agentic AI"
     subheading="Apply artificial intelligence to insurance servicing, underwriting support, claims enablement, decision support, and internal productivity. Making teams faster and smarter without replacing human judgment."
     whatItSolves="Insurance teams deal with repetitive decisions, fragmented information across systems, slow internal communication, manual guidance loops, and an ever-growing volume of data that exceeds human processing capacity. Underwriters spend time on routine assessments that follow predictable patterns. Servicing teams answer the same customer questions repeatedly. Claims coordinators manually track documents and deadlines. Leadership teams make decisions based on incomplete data. Agentic AI addresses these challenges by embedding intelligent automation and AI-powered assistance into the workflows where insurance teams spend their time."

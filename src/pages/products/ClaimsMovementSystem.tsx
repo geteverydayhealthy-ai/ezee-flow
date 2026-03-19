@@ -6,6 +6,7 @@ import imgMatters from "@/assets/visuals/v5-claims-resolution.jpg";
 
 const ClaimsMovementSystem = () => (
   <ProductPageTemplate
+    pageSlug="claims-movement-system"
     seoTitle="Claims Movement System for Insurance | Ezee Technologies"
     heading="Claims Movement System"
     subheading="A structured workflow platform for claim intake, coordination, tracking, and turnaround improvement. Bringing discipline to the most critical moment in insurance."

@@ -5,6 +5,7 @@ import imgMatters from "@/assets/visuals/v5-perf-outcome.jpg";
 
 const PerformanceMarketing = () => (
   <SolutionPageTemplate
+    pageSlug="performance-marketing"
     heading="Performance Marketing"
     subheading="Growth systems for insurers that need measurable customer acquisition, stronger funnel logic, and better conversion discipline. Turning marketing spend into actual policy sales."
     whatItSolves="Insurance growth often fails not because of insufficient spend, but because marketing activity is disconnected from funnel design, audience quality, landing page experience, and post-lead handling. Insurers invest in digital advertising, social media, and partner promotions but struggle to measure what actually drives policy sales versus what generates noise. Without structured funnel logic, audience segmentation, and conversion tracking, marketing budgets produce leads that never convert. Performance Marketing solves this by connecting acquisition strategy to conversion discipline across the full insurance customer funnel."

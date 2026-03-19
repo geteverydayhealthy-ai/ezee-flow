@@ -5,6 +5,7 @@ import imgMatters from "@/assets/visuals/v5-creative-impact.jpg";
 
 const CreativeOffice = () => (
   <SolutionPageTemplate
+    pageSlug="creative-office"
     heading="Creative Office"
     subheading="Insurance communication systems that make products clearer, more credible, and easier to understand. Helping insurers build trust and improve conversion through better storytelling."
     whatItSolves="Insurance products are inherently complex. They involve technical language, regulatory requirements, and abstract concepts like risk transfer and coverage limits that most customers find difficult to understand. This complexity leads to low engagement, weak trust, poor conversion rates, and customer confusion at critical decision points. The Creative Office solves this by designing communication systems that translate insurance complexity into clear, credible, and engaging experiences across every customer touchpoint."

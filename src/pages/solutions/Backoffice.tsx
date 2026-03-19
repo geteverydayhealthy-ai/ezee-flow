@@ -5,6 +5,7 @@ import imgMatters from "@/assets/visuals/v5-backoffice-governance.jpg";
 
 const Backoffice = () => (
   <SolutionPageTemplate
+    pageSlug="backoffice"
     heading="Backoffice"
     subheading="Bring discipline, visibility, and continuity to the internal movement of insurance operations. Making sure nothing falls through the cracks between teams, processes, and systems."
     whatItSolves="Insurance operations often break down not in customer-facing moments but in the internal coordination between teams, departments, and processes. Policy issuance gets delayed because of unclear handoffs. Claims coordination suffers from manual tracking. Servicing requests get lost between departments. Reporting is inconsistent because data lives in disconnected systems. The Backoffice solution addresses these internal operational failures by creating structured workflows, clear accountability chains, and real-time visibility across the internal movement of insurance work."
