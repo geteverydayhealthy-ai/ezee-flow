@@ -76,8 +76,8 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {images?.includes ? (
-                <img src={images.includes} alt={`${h} - What it includes`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
+              {imgIncludes ? (
+                <img src={imgIncludes} alt={`${h} - What it includes`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
               ) : (
                 <div className="bg-card-mint w-full h-full rounded-2xl" />
               )}
