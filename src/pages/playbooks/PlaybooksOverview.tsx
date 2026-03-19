@@ -9,15 +9,15 @@ const playbooks = [
   {
     title: "Blueprint & Strategy",
     href: "/playbooks/blueprint-strategy",
-    desc: "Map the insurer's current landscape, business model, product structure, operational bottlenecks, and desired target state.",
-    items: ["Journey maps", "Architecture recommendations", "Modular rollout sequence", "Capability priorities"],
+    desc: "A structured discovery and planning engagement that maps your current landscape, identifies priorities, and defines a clear digital transformation roadmap before any platform build begins.",
+    items: ["Current-state assessment", "Target architecture definition", "Phase-wise delivery plan", "Priority journey mapping"],
     icon: Map,
   },
   {
     title: "Embedded Insurance Infrastructure",
     href: "/playbooks/embedded-insurance-infrastructure",
-    desc: "Define how insurance should be distributed through partners, ecosystems, fintechs, digital channels, or white-label environments.",
-    items: ["Embedded journey designs", "Partner interface logic", "Deployment recommendations"],
+    desc: "A strategic design engagement that defines how insurance should be distributed through partners, ecosystems, fintechs, and digital channels — including partner roles, integration patterns, and operating models.",
+    items: ["Partner journey design", "Integration architecture", "Operating model definition", "Governance framework"],
     icon: Globe,
   },
 ];
@@ -25,21 +25,29 @@ const playbooks = [
 const PlaybooksOverview = () => (
   <Layout>
     <PageHero
-      heading="Playbooks before platforms"
-      subheading="The smartest insurance technology build starts with the right logic. Ezee Playbooks help insurers define workflows, architecture, and direction before full implementation begins."
-      primaryCta={{ label: "Book a Demo", href: "/contact" }}
+      heading="Playbooks: Strategic clarity before platform investment"
+      subheading="Ezee Playbooks are structured consulting engagements that help insurers define the right strategy, architecture, and execution plan before committing to a full technology build. Think of them as the strategic foundation that makes every subsequent investment smarter."
+      primaryCta={{ label: "Book a Consultation", href: "/contact" }}
     />
 
     <section className="section-spacing bg-accent/50">
       <div className="section-container max-w-3xl mx-auto text-center">
-        <p className="text-lg text-muted-foreground leading-relaxed">
-          Playbooks are strategic frameworks that reduce implementation waste. They help align business requirements, product logic, governance, and architecture before the build expands.
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6">What is a Playbook?</h2>
+        <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+          A Playbook is a focused strategic engagement — typically lasting 4 to 8 weeks — where Ezee Technologies works closely with an insurer's leadership and operations teams to assess the current state, define priorities, design target architectures, and create a clear, actionable roadmap for digital transformation.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Unlike generic consulting reports, Playbooks produce specific, implementable outputs: journey maps, architecture recommendations, modular rollout sequences, governance frameworks, and capability priorities that directly inform technology decisions. They reduce implementation waste, align stakeholders, and ensure that every dollar spent on technology delivers measurable business value.
         </p>
       </div>
     </section>
 
     <section className="section-spacing">
       <div className="section-container">
+        <h2 className="section-heading text-center mb-6">Who are Playbooks for?</h2>
+        <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-16">
+          Playbooks are designed for insurers, MGAs, and distribution companies that are planning a digital transformation but want strategic clarity before committing to a full technology investment.
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {playbooks.map((p, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
@@ -64,7 +72,26 @@ const PlaybooksOverview = () => (
       </div>
     </section>
 
-    <CTASection heading="Let's define the right starting point" ctaLabel="Book a Demo" ctaHref="/contact" />
+    <section className="section-spacing bg-accent/50">
+      <div className="section-container max-w-3xl">
+        <h2 className="section-heading text-center mb-12">Frequently asked questions</h2>
+        <div className="space-y-6">
+          {[
+            { q: "How long does a Playbook engagement take?", a: "Most Playbook engagements are completed within 4 to 8 weeks, depending on the scope and complexity of the insurer's current environment." },
+            { q: "What do we get at the end of a Playbook?", a: "You receive actionable deliverables — including journey maps, architecture recommendations, rollout sequences, governance frameworks, and priority definitions — that directly inform your technology investment decisions." },
+            { q: "Do we need to buy Ezee products after a Playbook?", a: "No. Playbook outputs are vendor-neutral and can inform any technology decision. However, the recommendations naturally align with Ezee's modular product architecture if you choose to proceed." },
+            { q: "Can a Playbook be done remotely?", a: "Yes. Playbook engagements can be conducted through a combination of remote workshops, stakeholder interviews, and collaborative working sessions." },
+          ].map((f, i) => (
+            <div key={i} className="bg-card rounded-xl p-6 border border-border">
+              <h3 className="font-semibold mb-2">{f.q}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CTASection heading="Start with clarity. Build with confidence." subheading="Book a Playbook consultation to define the right starting point for your insurance transformation." ctaLabel="Book a Consultation" ctaHref="/contact" />
   </Layout>
 );
 

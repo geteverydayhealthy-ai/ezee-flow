@@ -1,37 +1,51 @@
 import { BarChart3 } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
 import imgSolves from "@/assets/visuals/v2-partner-network.jpg";
-import imgIncludes from "@/assets/visuals/v2-team-collaboration.jpg";
+import imgIncludes from "@/assets/visuals/v3-agency-collab.jpg";
 import imgMatters from "@/assets/visuals/v2-intelligence-insight.jpg";
 
 const AgencyDashboard = () => (
   <ProductPageTemplate
-    seoTitle="Agency Dashboard | Ezee Technologies"
+    seoTitle="Agency Dashboard for Insurance Distribution | Ezee Technologies"
     heading="Agency Dashboard"
-    subheading="A distribution management platform for brokers, agents, channel teams, and partner networks."
+    subheading="A distribution management platform for brokers, agents, channel teams, and partner networks — giving insurers the visibility and control they need to scale distribution intelligently."
+    supportingLine="See your distribution network clearly. Manage it with confidence."
     outcomeLine="Stronger channel visibility. Better partner control. Smarter distribution growth."
     sections={[
       {
-        heading: "What it solves",
-        content: "Distribution teams need better visibility into policies, pipeline, commissions, activity, and partner performance. Without a structured dashboard, agency networks become hard to manage and even harder to scale.",
+        heading: "Why distribution visibility matters",
+        content: "As insurance distribution grows across agents, brokers, bancassurance partners, digital affiliates, and ecosystem channels, managing these networks becomes increasingly complex. Distribution teams need clear visibility into policy production, pipeline health, commission structures, partner activity, and performance trends. Without a structured dashboard, agency networks become difficult to manage, hard to optimize, and nearly impossible to scale strategically. The Agency Dashboard gives insurers a single, structured view of their entire distribution ecosystem — making it easier to identify top performers, address underperformance, and make data-driven distribution decisions.",
         icon: BarChart3,
         visual: "right",
         image: imgSolves,
       },
       {
-        heading: "What it includes",
-        items: ["Partner and agent visibility", "Policy-level tracking", "Production reporting", "Commission view", "Performance monitoring", "Channel activity overview", "Configurable access controls"],
+        heading: "What the Agency Dashboard includes",
+        items: [
+          "Comprehensive partner and agent profiles with onboarding status, performance history, and compliance tracking",
+          "Policy-level tracking across agents, branches, and channels with real-time production visibility",
+          "Production reporting with month-over-month trends, target tracking, and comparative performance analysis",
+          "Commission visibility with calculation logic, payment status, and reconciliation support",
+          "Performance monitoring with scorecards, activity metrics, and configurable KPIs per channel",
+          "Channel activity overview showing partner engagement, submission patterns, and conversion trends",
+          "Configurable access controls allowing different views for headquarters, regional managers, and individual agents",
+        ],
         icon: BarChart3,
         visual: "left",
         image: imgIncludes,
       },
       {
-        heading: "Why it matters",
-        content: "As insurance distribution grows across agents, brokers, and ecosystem channels, visibility becomes a competitive advantage. Agency Dashboard helps make distribution more measurable and manageable.",
+        heading: "Scale distribution with intelligence",
+        content: "As insurance distribution grows more complex and multi-channel, visibility becomes a competitive advantage. The Agency Dashboard helps insurers make distribution more measurable, more manageable, and more strategically directed. Instead of relying on periodic manual reports, distribution leaders get real-time insight into what is working, what needs attention, and where growth opportunities exist. Whether managing a network of 50 agents or 5,000, the dashboard provides the structure and clarity that modern insurance distribution demands.",
         icon: BarChart3,
         visual: "right",
         image: imgMatters,
       },
+    ]}
+    faq={[
+      { q: "Can agents access their own performance data?", a: "Yes. The dashboard supports role-based access so agents can see their own production, commissions, and performance metrics while management sees the full network view." },
+      { q: "Does it support multiple distribution channel types?", a: "Yes. It supports agents, brokers, bancassurance partners, digital affiliates, and embedded distribution channels in one unified view." },
+      { q: "Can it calculate commissions automatically?", a: "Yes. Commission logic is configurable per product, channel, and agent tier, with automated calculation and reconciliation support." },
     ]}
     relatedLinks={[
       { label: "Lead & Opportunity Engine", href: "/products/lead-opportunity-engine" },
