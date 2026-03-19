@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Shield, Layers, Workflow, BarChart3, Zap, Settings, Eye, Target, Users, Bot, Briefcase } from "lucide-react";
 import Layout from "@/components/Layout";
 import CTASection from "@/components/CTASection";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const floatingCards = [
   { label: "Modular\ntech stack", color: "bg-card-teal text-primary-foreground", x: "left-[5%]", y: "top-[8%]", delay: 0, tags: ["Funnels", "Claims", "Data", "Portals", "Policy admin"] },
@@ -41,6 +42,19 @@ const principles = [
 ];
 
 const Index = () => {
+  const { get } = usePageContent("home");
+
+  const heroHeading = get("hero", "heading", "The digital backbone for insurance innovation");
+  const heroSubheading = get("hero", "subheading", "Ezee Technologies helps insurers modernize distribution, operations, and customer experience through configurable infrastructure built for how insurance actually works.");
+  const thesisEyebrow = get("platform_thesis", "eyebrow", "The platform thesis");
+  const thesisHeading = get("platform_thesis", "heading", "The Digital Operating Layer for Insurance");
+  const thesisDesc = get("platform_thesis", "description", "A modern technology layer that sits above legacy systems and helps insurers launch digital journeys, automate workflows, integrate partners, and build intelligence. No need to rip out what already works.");
+  const posHeading = get("positioning", "heading", "One technology partner. Every layer of insurance modernization.");
+  const posDesc = get("positioning", "description", "Whether you are a startup MGA, a mid-sized insurer, or a large composite carrier, Ezee Technologies gives you the infrastructure, architecture, and execution capability to move forward on your own terms.");
+  const ctaHeading = get("cta", "heading", "Ready to modernize your insurance operations?");
+  const ctaSubheading = get("cta", "subheading", "Whether you need one product, a focused solution, or a broader transformation roadmap, we will help you find the smartest starting point.");
+  const ctaLabel = get("cta", "ctaLabel", "Book a Demo");
+
   return (
     <Layout>
       {/* Hero */}
@@ -80,12 +94,8 @@ const Index = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <h1 className="hero-heading mb-6">
-                The digital backbone for insurance innovation
-              </h1>
-              <p className="section-subheading mx-auto mb-10">
-                Ezee Technologies helps insurers modernize distribution, operations, and customer experience through configurable infrastructure built for how insurance actually works.
-              </p>
+              <h1 className="hero-heading mb-6">{heroHeading}</h1>
+              <p className="section-subheading mx-auto mb-10">{heroSubheading}</p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/products/digital-operating-layer" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity">
                   Explore Platform <ArrowRight className="w-4 h-4" />
@@ -123,11 +133,9 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="eyebrow mb-4">The platform thesis</p>
-            <h2 className="section-heading mb-6">The Digital Operating Layer for Insurance</h2>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              A modern technology layer that sits above legacy systems and helps insurers launch digital journeys, automate workflows, integrate partners, and build intelligence. No need to rip out what already works.
-            </p>
+            <p className="eyebrow mb-4">{thesisEyebrow}</p>
+            <h2 className="section-heading mb-6">{thesisHeading}</h2>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8">{thesisDesc}</p>
             <Link to="/products/digital-operating-layer" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all">
               Explore the Digital Operating Layer <ArrowRight className="w-4 h-4" />
             </Link>
@@ -323,8 +331,8 @@ const Index = () => {
       {/* One-stop positioning */}
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="section-container text-center max-w-3xl mx-auto">
-          <p className="text-2xl sm:text-3xl font-bold mb-4">One technology partner. Every layer of insurance modernization.</p>
-          <p className="text-primary-foreground/70 text-sm leading-relaxed">Whether you are a startup MGA, a mid-sized insurer, or a large composite carrier, Ezee Technologies gives you the infrastructure, architecture, and execution capability to move forward on your own terms.</p>
+          <p className="text-2xl sm:text-3xl font-bold mb-4">{posHeading}</p>
+          <p className="text-primary-foreground/70 text-sm leading-relaxed">{posDesc}</p>
         </div>
       </section>
 
@@ -349,9 +357,9 @@ const Index = () => {
       </section>
 
       <CTASection
-        heading="Ready to modernize your insurance operations?"
-        subheading="Whether you need one product, a focused solution, or a broader transformation roadmap, we will help you find the smartest starting point."
-        ctaLabel="Book a Demo"
+        heading={ctaHeading}
+        subheading={ctaSubheading}
+        ctaLabel={ctaLabel}
         ctaHref="/contact"
       />
     </Layout>
