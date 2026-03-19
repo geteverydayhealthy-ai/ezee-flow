@@ -1,15 +1,15 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
 import imgSolves from "@/assets/visuals/v2-creative-design.jpg";
-import imgIncludes from "@/assets/visuals/v2-happy-team.jpg";
-import imgMatters from "@/assets/visuals/v2-growth-marketing.jpg";
+import imgIncludes from "@/assets/visuals/v2-customer-journey.jpg";
+import imgMatters from "@/assets/visuals/v3-creative-impact.jpg";
 
 const CreativeOffice = () => (
   <SolutionPageTemplate
     heading="Creative Office"
-    subheading="Insurance communication systems that make products clearer, more credible, and easier to understand."
-    whatItSolves="Insurance products are often difficult to explain, difficult to trust, and difficult to make engaging."
-    whatItIncludes="Brand communication systems, campaign concepts, product explainers, UI/UX content support, launch assets, landing page content, and customer journey messaging."
-    whyItMatters="Better communication improves trust, comprehension, and conversion across every digital journey."
+    subheading="Insurance communication systems that make products clearer, more credible, and easier to understand — helping insurers build trust and improve conversion through better storytelling."
+    whatItSolves="Insurance products are inherently complex. They involve technical language, regulatory requirements, and abstract concepts like risk transfer and coverage limits that most customers find difficult to understand. This complexity often leads to low engagement, weak trust, poor conversion rates, and customer confusion at critical decision points. The Creative Office solves this by designing communication systems that translate insurance complexity into clear, credible, and engaging experiences — across every customer touchpoint from first impression to policy purchase and renewal."
+    whatItIncludes="Brand communication systems and visual identity design that position insurers as modern, trustworthy, and customer-centric. Campaign concepts and launch strategies for new products, channels, and markets. Product explainer content that breaks down coverage, benefits, and terms into language customers actually understand. UI/UX content support for digital journeys, portals, and apps — ensuring that every screen communicates clearly. Landing page content optimized for conversion and search visibility. Customer journey messaging across onboarding, servicing, renewals, and claims communication. All creative work is grounded in insurance-specific context and designed to support measurable business outcomes."
+    whyItMatters="Better communication directly improves trust, comprehension, and conversion across every digital insurance journey. When customers understand what they are buying, when product pages explain value clearly, when onboarding flows feel intuitive, and when brand presence feels credible — the entire business benefits. The Creative Office ensures that communication is never an afterthought but a strategic capability that supports growth, retention, and customer satisfaction."
     images={{ solves: imgSolves, includes: imgIncludes, matters: imgMatters }}
   />
 );
