@@ -19,23 +19,23 @@ const productCards = [
   { title: "Digital Spine", desc: "Connect acquisition, workflows, governance, and intelligence", href: "/products/digital-spine", icon: Workflow },
   { title: "Insurance CRM + ERP", desc: "Structure sales, servicing, and internal operations", href: "/products/insurance-crm-erp", icon: Users },
   { title: "Lead & Opportunity Engine", desc: "Bring discipline to demand and conversion", href: "/products/lead-opportunity-engine", icon: Target },
-  { title: "Claims Movement System", desc: "Improve claim visibility, tracking, and communication", href: "/products/claims-movement-system", icon: Eye },
+  { title: "Claims Movement System", desc: "Structured claims intake, coordination, and resolution", href: "/products/claims-movement-system", icon: Eye },
   { title: "Agency Dashboard", desc: "Manage channel visibility and partner performance", href: "/products/agency-dashboard", icon: BarChart3 },
-  { title: "AI-enabled BI & Analytics", desc: "Turn business movement into usable insight", href: "/products/ai-business-intelligence-analytics", icon: Bot },
+  { title: "AI-enabled BI & Analytics", desc: "Turn operational data into actionable intelligence", href: "/products/ai-business-intelligence-analytics", icon: Bot },
 ];
 
 const solutionCards = [
-  { title: "Creative Office", desc: "Make insurance clearer, more credible, and easier to experience", href: "/solutions/creative-office", icon: Briefcase },
-  { title: "Performance Marketing", desc: "Build measurable insurance growth systems", href: "/solutions/performance-marketing", icon: Target },
-  { title: "App & Tech Development", desc: "Build customer and operational insurance platforms", href: "/solutions/app-tech-development", icon: Settings },
+  { title: "Creative Office", desc: "Make insurance communication clear, credible, and conversion-ready", href: "/solutions/creative-office", icon: Briefcase },
+  { title: "Performance Marketing", desc: "Build measurable insurance acquisition systems", href: "/solutions/performance-marketing", icon: Target },
+  { title: "App & Tech Development", desc: "Build insurance-native customer and operational platforms", href: "/solutions/app-tech-development", icon: Settings },
   { title: "Agentic AI", desc: "Apply AI to insurance workflows and decision support", href: "/solutions/agentic-ai", icon: Bot },
-  { title: "Backoffice", desc: "Strengthen internal insurance operations and servicing discipline", href: "/solutions/backoffice", icon: Workflow },
+  { title: "Backoffice", desc: "Bring discipline and visibility to internal insurance operations", href: "/solutions/backoffice", icon: Workflow },
 ];
 
 const principles = [
   { icon: Zap, title: "Fastest go-to-market" },
   { icon: Settings, title: "Nothing hardcoded" },
-  { icon: Shield, title: "Configured around product, business, and governance requirements" },
+  { icon: Shield, title: "Configured around your product, business, and governance needs" },
   { icon: Layers, title: "Modular deployment" },
   { icon: Eye, title: "Control built in, not added later" },
 ];
@@ -45,7 +45,6 @@ const Index = () => {
     <Layout>
       {/* Hero */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
-        {/* Curved SVG lines */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="xMidYMid slice">
           <path d="M-50 200 Q 200 350, 400 300 T 720 400 T 1050 350 T 1500 500" stroke="hsl(var(--border))" strokeWidth="1.5" fill="none" />
           <path d="M-50 500 Q 300 250, 500 400 T 900 300 T 1200 450 T 1550 300" stroke="hsl(var(--border))" strokeWidth="1.5" fill="none" />
@@ -53,7 +52,6 @@ const Index = () => {
 
         <div className="section-container relative z-10 w-full">
           <div className="relative min-h-[600px] flex items-center justify-center">
-            {/* Floating cards - desktop only */}
             <div className="hidden lg:block">
               {floatingCards.map((card, i) => (
                 <motion.div
@@ -76,7 +74,6 @@ const Index = () => {
               ))}
             </div>
 
-            {/* Center content */}
             <motion.div
               className="text-center max-w-3xl mx-auto relative z-10"
               initial={{ opacity: 0, y: 30 }}
@@ -87,7 +84,7 @@ const Index = () => {
                 The digital backbone for insurance innovation
               </h1>
               <p className="section-subheading mx-auto mb-10">
-                Ezee Technologies helps insurers modernize distribution, operations, and customer experience through configurable infrastructure built for real insurance workflows.
+                Ezee Technologies helps insurers modernize distribution, operations, and customer experience through configurable infrastructure built for how insurance actually works.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/products/digital-operating-layer" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity">
@@ -100,7 +97,6 @@ const Index = () => {
             </motion.div>
           </div>
 
-          {/* Mobile floating cards */}
           <div className="lg:hidden grid grid-cols-2 gap-3 mt-8">
             {floatingCards.slice(0, 6).map((card, i) => (
               <motion.div
@@ -130,7 +126,7 @@ const Index = () => {
             <p className="eyebrow mb-4">The platform thesis</p>
             <h2 className="section-heading mb-6">The Digital Operating Layer for Insurance</h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              A modern technology layer that sits above legacy systems and helps insurers launch digital journeys, automate workflows, integrate partners, and build intelligence — without replacing everything underneath.
+              A modern technology layer that sits above legacy systems and helps insurers launch digital journeys, automate workflows, integrate partners, and build intelligence. No need to rip out what already works.
             </p>
             <Link to="/products/digital-operating-layer" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all">
               Explore the Digital Operating Layer <ArrowRight className="w-4 h-4" />
@@ -153,10 +149,10 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: Layers, text: "Digital distribution across web, app, embedded, and partner channels" },
-              { icon: Users, text: "Interactive onboarding and self-service" },
+              { icon: Users, text: "Interactive onboarding and self-service portals" },
               { icon: Workflow, text: "Workflow automation across underwriting, servicing, and claims" },
-              { icon: Settings, text: "API-based partner integration" },
-              { icon: Zap, text: "Configurable product setup and launch support" },
+              { icon: Settings, text: "API-based partner and ecosystem integration" },
+              { icon: Zap, text: "Configurable product setup and faster launches" },
               { icon: BarChart3, text: "Real-time visibility, reporting, and AI-enabled intelligence" },
             ].map((item, i) => (
               <motion.div
@@ -229,8 +225,8 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <p className="eyebrow mb-4">Execution Pods</p>
-            <h2 className="section-heading max-w-3xl mx-auto mb-4">Specialized execution pods for insurance growth and transformation</h2>
-            <p className="section-subheading mx-auto">Focused teams that solve specific parts of insurance modernization — from customer-facing communication to technology, AI, and backoffice execution.</p>
+            <h2 className="section-heading max-w-3xl mx-auto mb-4">Specialized teams for insurance growth and transformation</h2>
+            <p className="section-subheading mx-auto">Focused capabilities that solve specific parts of insurance modernization, from customer-facing communication to technology, AI, and backoffice execution.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -267,7 +263,7 @@ const Index = () => {
           >
             <p className="eyebrow mb-4">Platform Products</p>
             <h2 className="section-heading max-w-3xl mx-auto mb-4">Modular products built for real insurance execution</h2>
-            <p className="section-subheading mx-auto">Each product solves a specific insurance problem. Together they create a more connected, intelligent, and scalable operating environment.</p>
+            <p className="section-subheading mx-auto">Each product solves a specific insurance problem. Together they form a connected, intelligent, and scalable operating environment.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -324,15 +320,24 @@ const Index = () => {
         </div>
       </section>
 
+      {/* One-stop positioning */}
+      <section className="py-16 bg-primary text-primary-foreground">
+        <div className="section-container text-center max-w-3xl mx-auto">
+          <p className="text-2xl sm:text-3xl font-bold mb-4">One technology partner. Every layer of insurance modernization.</p>
+          <p className="text-primary-foreground/70 text-sm leading-relaxed">Whether you are a startup MGA, a mid-sized insurer, or a large composite carrier, Ezee Technologies gives you the infrastructure, architecture, and execution capability to move forward on your own terms.</p>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="section-spacing bg-accent/50">
         <div className="section-container max-w-3xl">
           <h2 className="section-heading text-center mb-12">Frequently asked questions</h2>
           <div className="space-y-6">
             {[
-              { q: "What does Ezee Technologies do?", a: "Ezee Technologies helps insurers modernize distribution, customer journeys, workflows, governance, and intelligence through configurable insurance infrastructure." },
-              { q: "What is the Digital Operating Layer for Insurance?", a: "It is a modern technology layer that sits above legacy systems and helps insurers launch digital journeys, automate workflows, integrate partners, and build intelligence without replacing everything underneath." },
-              { q: "Who is Ezee Technologies built for?", a: "It is built for insurers, insurance operators, digital distribution businesses, brokers, channel-led insurance businesses, and ecosystem partners that need modern insurance infrastructure." },
+              { q: "What does Ezee Technologies do?", a: "We help insurers modernize distribution, customer journeys, workflows, governance, and intelligence through configurable, insurance-native infrastructure. We work with insurers of all sizes, from MGAs to large carriers." },
+              { q: "What is the Digital Operating Layer for Insurance?", a: "It is a modern technology layer that sits above your existing core systems. It lets you launch digital journeys, automate workflows, integrate partners, and build intelligence without needing to replace what you already have." },
+              { q: "Who is Ezee Technologies built for?", a: "Insurers, MGAs, digital distribution businesses, embedded insurance ecosystems, brokers, and any insurance organization that needs modern, configurable technology infrastructure." },
+              { q: "Can we start with just one product?", a: "Yes. Every product is designed to work independently. You can start with a single product and expand over time as your needs grow. No forced bundling." },
             ].map((faq, i) => (
               <div key={i} className="bg-card rounded-xl p-6 border border-border">
                 <h3 className="font-semibold mb-2">{faq.q}</h3>
@@ -343,10 +348,9 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
       <CTASection
-        heading="Let's build the right digital layer for your insurance business"
-        subheading="Whether you need one journey, one product, or a broader modernization roadmap, Ezee Technologies will help you define the smartest starting point."
+        heading="Ready to modernize your insurance operations?"
+        subheading="Whether you need one product, a focused solution, or a broader transformation roadmap, we will help you find the smartest starting point."
         ctaLabel="Book a Demo"
         ctaHref="/contact"
       />

@@ -1,20 +1,20 @@
 import { Eye } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
 import imgSolves from "@/assets/visuals/v2-claims-processing.jpg";
-import imgIncludes from "@/assets/visuals/v3-claims-coordination.jpg";
-import imgMatters from "@/assets/visuals/v3-claims-trust.jpg";
+import imgIncludes from "@/assets/visuals/v4-strategy-session.jpg";
+import imgMatters from "@/assets/visuals/v4-team-collab.jpg";
 
 const ClaimsMovementSystem = () => (
   <ProductPageTemplate
     seoTitle="Claims Movement System for Insurance | Ezee Technologies"
     heading="Claims Movement System"
-    subheading="A structured workflow platform for claim intake, coordination, visibility, tracking, and turnaround improvement — bringing discipline to the most critical moment in insurance."
-    supportingLine="From first notification to resolution — structured, visible, and controlled."
+    subheading="A structured workflow platform for claim intake, coordination, tracking, and turnaround improvement. Bringing discipline to the most critical moment in insurance."
+    supportingLine="From first notification to resolution: structured, visible, and controlled."
     outcomeLine="Better visibility. Better coordination. Better claims experience."
     sections={[
       {
         heading: "Why claims need a dedicated movement system",
-        content: "Claims are one of the most sensitive and operationally complex moments in the insurance lifecycle. Yet in many organizations, claims are still managed through fragmented emails, manual spreadsheet updates, unclear internal handoffs, and disconnected communication channels. This leads to poor customer experience, slow resolution times, internal coordination failures, and increased complaint risk. The Claims Movement System brings structure to the full claims journey — from first notification of loss through intake, assessment, coordination, documentation, approval, and resolution — so that every claim moves through a defined, trackable, and manageable process.",
+        content: "Claims are one of the most sensitive and operationally complex moments in the insurance lifecycle. Yet in many organizations, claims are still managed through fragmented emails, manual spreadsheet updates, unclear handoffs, and disconnected communication. This leads to poor customer experience, slow resolution, internal coordination failures, and increased complaint risk. The Claims Movement System brings structure to the full claims journey, from first notification of loss through intake, assessment, coordination, documentation, approval, and resolution, so that every claim moves through a defined, trackable process.",
         icon: Eye,
         visual: "right",
         image: imgSolves,
@@ -36,7 +36,7 @@ const ClaimsMovementSystem = () => (
       },
       {
         heading: "Build trust through claims transparency",
-        content: "Claims handling should never feel opaque, chaotic, or unresponsive. The Claims Movement System helps insurers improve both internal operational control and customer trust by making claims movement visible, trackable, and manageable at every step. When customers can see progress, when teams can coordinate without confusion, and when management can monitor turnaround and quality, the entire claims experience improves. For insurers, this translates into faster resolution, fewer complaints, better regulatory compliance, and stronger customer retention — because a well-handled claim builds more loyalty than a well-sold policy.",
+        content: "Claims handling should never feel opaque or chaotic. The Claims Movement System helps insurers improve both internal operational control and customer trust by making claims movement visible, trackable, and manageable at every step. When customers can see progress, when teams can coordinate without confusion, and when management can monitor turnaround and quality, the entire claims experience improves. For insurers, this translates into faster resolution, fewer complaints, better regulatory compliance, and stronger customer retention. A well-handled claim builds more loyalty than a well-sold policy.",
         icon: Eye,
         visual: "right",
         image: imgMatters,
@@ -45,7 +45,7 @@ const ClaimsMovementSystem = () => (
     faq={[
       { q: "Does the system handle all types of insurance claims?", a: "Yes. It is configurable across motor, health, life, property, and general insurance claims with product-specific workflow variations." },
       { q: "Can customers track their claim status?", a: "Yes. The system supports customer-facing status updates through portals, email notifications, and SMS triggers." },
-      { q: "Does it integrate with existing claims systems?", a: "Yes. It can connect with existing core claims administration systems through APIs, enabling synchronized data and workflow triggers." },
+      { q: "Does it integrate with existing claims systems?", a: "Yes. It connects with existing core claims administration systems through APIs, enabling synchronized data and workflow triggers." },
     ]}
     relatedLinks={[
       { label: "Digital Spine", href: "/products/digital-spine" },
