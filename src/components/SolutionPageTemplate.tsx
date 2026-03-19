@@ -20,7 +20,7 @@ interface SolutionPageProps {
   };
 }
 
-const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, whatItIncludes, whyItMatters, images }: SolutionPageProps) => {
+const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, whatItIncludes, whyItMatters, ctaHeading, ctaLabel, images }: SolutionPageProps) => {
   const { get } = usePageContent(pageSlug);
 
   const h = get("hero", "heading", heading);
@@ -28,6 +28,15 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
   const solves = get("content", "whatItSolves", whatItSolves);
   const includes = get("content", "whatItIncludes", whatItIncludes);
   const matters = get("content", "whyItMatters", whyItMatters);
+  const cmsImgSolves = get("images", "solves", "");
+  const cmsImgIncludes = get("images", "includes", "");
+  const cmsImgMatters = get("images", "matters", "");
+  const finalCtaHeading = get("cta", "heading", ctaHeading || "Let's talk about what you need");
+  const finalCtaLabel = get("cta", "ctaLabel", ctaLabel || "Talk to our team");
+
+  const imgSolves = cmsImgSolves || images?.solves;
+  const imgIncludes = cmsImgIncludes || images?.includes;
+  const imgMatters = cmsImgMatters || images?.matters;
 
   return (
     <Layout>
