@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <img src={logoWhite} alt="Ezee Technologies" className="h-10 w-auto mb-6" />
+            <img src={logoWhite} alt="Ezee Technologies" className="h-12 sm:h-14 w-auto mb-6" />
             <p className="text-sm text-secondary-foreground/70 leading-relaxed">
               Insurance-native digital infrastructure company building the Digital Operating Layer for Insurance.
             </p>
