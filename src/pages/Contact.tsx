@@ -2,6 +2,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 import Layout from "@/components/Layout";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+
+const CONTACT_FORM_SLUG = "contact-form";
 
 const helpOptions = [
   "Digital Operating Layer discussion",
@@ -18,10 +22,51 @@ const helpOptions = [
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    help_with: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      // First try to find the contact form in DB
+      const { data: form } = await supabase
+        .from("forms")
+        .select("id")
+        .eq("slug", CONTACT_FORM_SLUG)
+        .eq("is_active", true)
+        .maybeSingle();
+
+      if (form) {
+        // Save submission to database
+        const { error } = await supabase.from("form_submissions").insert({
+          form_id: form.id,
+          data: formData as any,
+          source_url: window.location.href,
+        });
+        if (error) throw error;
+      }
+
+      setSubmitted(true);
+      toast.success("Message sent successfully!");
+    } catch (err: any) {
+      console.error("Submission error:", err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
