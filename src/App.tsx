@@ -70,46 +70,59 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <AnimatePresence mode="wait">
-          {loading && <LoadingScreen key="loading" onComplete={handleLoadingComplete} />}
-        </AnimatePresence>
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
+        <AuthProvider>
+          <Toaster />
+          <Sonner />
+          <AnimatePresence mode="wait">
+            {loading && <LoadingScreen key="loading" onComplete={handleLoadingComplete} />}
+          </AnimatePresence>
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/" element={<Index />} />
 
-            {/* Products */}
-            <Route path="/products" element={<ProductsOverview />} />
-            <Route path="/products/digital-operating-layer" element={<DigitalOperatingLayer />} />
-            <Route path="/products/digital-spine" element={<DigitalSpine />} />
-            <Route path="/products/insurance-crm-erp" element={<InsuranceCrmErp />} />
-            <Route path="/products/lead-opportunity-engine" element={<LeadOpportunityEngine />} />
-            <Route path="/products/claims-movement-system" element={<ClaimsMovementSystem />} />
-            <Route path="/products/agency-dashboard" element={<AgencyDashboard />} />
-            <Route path="/products/ai-business-intelligence-analytics" element={<AIBusinessIntelligence />} />
+              {/* Products */}
+              <Route path="/products" element={<ProductsOverview />} />
+              <Route path="/products/digital-operating-layer" element={<DigitalOperatingLayer />} />
+              <Route path="/products/digital-spine" element={<DigitalSpine />} />
+              <Route path="/products/insurance-crm-erp" element={<InsuranceCrmErp />} />
+              <Route path="/products/lead-opportunity-engine" element={<LeadOpportunityEngine />} />
+              <Route path="/products/claims-movement-system" element={<ClaimsMovementSystem />} />
+              <Route path="/products/agency-dashboard" element={<AgencyDashboard />} />
+              <Route path="/products/ai-business-intelligence-analytics" element={<AIBusinessIntelligence />} />
 
-            {/* Solutions */}
-            <Route path="/solutions" element={<SolutionsOverview />} />
-            <Route path="/solutions/creative-office" element={<CreativeOffice />} />
-            <Route path="/solutions/performance-marketing" element={<PerformanceMarketing />} />
-            <Route path="/solutions/app-tech-development" element={<AppTechDevelopment />} />
-            <Route path="/solutions/agentic-ai" element={<AgenticAI />} />
-            <Route path="/solutions/backoffice" element={<Backoffice />} />
+              {/* Solutions */}
+              <Route path="/solutions" element={<SolutionsOverview />} />
+              <Route path="/solutions/creative-office" element={<CreativeOffice />} />
+              <Route path="/solutions/performance-marketing" element={<PerformanceMarketing />} />
+              <Route path="/solutions/app-tech-development" element={<AppTechDevelopment />} />
+              <Route path="/solutions/agentic-ai" element={<AgenticAI />} />
+              <Route path="/solutions/backoffice" element={<Backoffice />} />
 
-            {/* Playbooks */}
-            <Route path="/playbooks" element={<PlaybooksOverview />} />
-            <Route path="/playbooks/blueprint-strategy" element={<BlueprintStrategy />} />
-            <Route path="/playbooks/embedded-insurance-infrastructure" element={<EmbeddedInsurance />} />
+              {/* Playbooks */}
+              <Route path="/playbooks" element={<PlaybooksOverview />} />
+              <Route path="/playbooks/blueprint-strategy" element={<BlueprintStrategy />} />
+              <Route path="/playbooks/embedded-insurance-infrastructure" element={<EmbeddedInsurance />} />
 
-            {/* Other */}
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
+              {/* Other */}
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+              {/* Admin CMS */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="pages" element={<AdminPages />} />
+                <Route path="forms" element={<AdminForms />} />
+                <Route path="submissions" element={<AdminSubmissions />} />
+                <Route path="blog" element={<AdminBlog />} />
+                <Route path="users" element={<AdminUsers />} />
+              </Route>
+
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
