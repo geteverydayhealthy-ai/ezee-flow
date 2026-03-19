@@ -49,14 +49,10 @@ const ScrollToTop = () => {
 };
 
 const App = () => {
-  const [loading, setLoading] = useState(() => {
-    // Only show loading on first visit per session
-    return !sessionStorage.getItem("ezee-loaded");
-  });
+  const [loading, setLoading] = useState(true);
 
   const handleLoadingComplete = useCallback(() => {
     setLoading(false);
-    sessionStorage.setItem("ezee-loaded", "true");
   }, []);
 
   return (
