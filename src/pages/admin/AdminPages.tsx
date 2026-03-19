@@ -6,19 +6,56 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Plus, Save, Trash2, Upload, Image, RefreshCw } from "lucide-react";
+import { Plus, Save, Trash2, Upload, Image, RefreshCw, Undo2, Redo2 } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
+import { useUndoRedo } from "@/hooks/useUndoRedo";
 
 type PageContent = Tables<"page_content">;
+
+// All available page slugs in the project
+const PAGE_SLUGS = [
+  { value: "home", label: "Home" },
+  { value: "about", label: "About" },
+  { value: "contact", label: "Contact" },
+  { value: "solutions", label: "Solutions Overview" },
+  { value: "creative-office", label: "Creative Office" },
+  { value: "performance-marketing", label: "Performance Marketing" },
+  { value: "app-tech-development", label: "App & Tech Development" },
+  { value: "agentic-ai", label: "Agentic AI" },
+  { value: "backoffice", label: "Backoffice" },
+  { value: "products", label: "Products Overview" },
+  { value: "digital-operating-layer", label: "Digital Operating Layer" },
+  { value: "digital-spine", label: "Digital Spine" },
+  { value: "insurance-crm-erp", label: "Insurance CRM & ERP" },
+  { value: "lead-opportunity-engine", label: "Lead & Opportunity Engine" },
+  { value: "claims-movement-system", label: "Claims Movement System" },
+  { value: "agency-dashboard", label: "Agency Dashboard" },
+  { value: "ai-business-intelligence", label: "AI Business Intelligence" },
+  { value: "playbooks", label: "Playbooks Overview" },
+  { value: "blueprint-strategy", label: "Blueprint Strategy" },
+  { value: "embedded-insurance", label: "Embedded Insurance" },
+];
+
+const SECTION_KEYS = [
+  { value: "hero", label: "Hero Section" },
+  { value: "content", label: "Content" },
+  { value: "images", label: "Images" },
+  { value: "cta", label: "CTA Section" },
+  { value: "features", label: "Features" },
+  { value: "outcomeLine", label: "Outcome Line" },
+];
 
 const AdminPages = () => {
   const { user } = useAuth();
   const [pages, setPages] = useState<PageContent[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [form, setForm] = useState({ page_slug: "", section_key: "", content: "{}" });
+  const [pageSlug, setPageSlug] = useState("");
+  const [sectionKey, setSectionKey] = useState("");
+  const contentHistory = useUndoRedo("{}");
   const [confirmAction, setConfirmAction] = useState<{ type: "save" | "delete"; id?: string } | null>(null);
   const [uploading, setUploading] = useState(false);
   const [replacingKey, setReplacingKey] = useState<string | null>(null);
@@ -33,9 +70,16 @@ const AdminPages = () => {
 
   useEffect(() => { fetchPages(); }, []);
 
+  const resetForm = () => {
+    setEditingId(null);
+    setPageSlug("");
+    setSectionKey("");
+    contentHistory.reset("{}");
+  };
+
   const handleSave = async () => {
     try {
-      const contentJson = JSON.parse(form.content);
+      const contentJson = JSON.parse(contentHistory.current);
       if (editingId) {
         const { error } = await supabase
           .from("page_content")
@@ -45,16 +89,15 @@ const AdminPages = () => {
         toast.success("Page section updated!");
       } else {
         const { error } = await supabase.from("page_content").insert({
-          page_slug: form.page_slug,
-          section_key: form.section_key,
+          page_slug: pageSlug,
+          section_key: sectionKey,
           content: contentJson,
           updated_by: user?.id,
         });
         if (error) throw error;
         toast.success("Page section created!");
       }
-      setEditingId(null);
-      setForm({ page_slug: "", section_key: "", content: "{}" });
+      resetForm();
       fetchPages();
     } catch (e: any) {
       toast.error(e.message || "Error saving");
@@ -63,11 +106,9 @@ const AdminPages = () => {
 
   const handleEdit = (page: PageContent) => {
     setEditingId(page.id);
-    setForm({
-      page_slug: page.page_slug,
-      section_key: page.section_key,
-      content: JSON.stringify(page.content, null, 2),
-    });
+    setPageSlug(page.page_slug);
+    setSectionKey(page.section_key);
+    contentHistory.reset(JSON.stringify(page.content, null, 2));
   };
 
   const handleDelete = async (id: string) => {
@@ -76,34 +117,33 @@ const AdminPages = () => {
     else { toast.success("Deleted!"); fetchPages(); }
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploading(true);
+  const uploadToStorage = async (file: File): Promise<string | null> => {
     const ext = file.name.split(".").pop();
-    const path = `${form.page_slug}/${form.section_key}/${Date.now()}.${ext}`;
-
+    const path = `${pageSlug}/${sectionKey}/${Date.now()}.${ext}`;
     const { error } = await supabase.storage.from("cms-images").upload(path, file, { upsert: true });
     if (error) {
       toast.error("Upload failed: " + error.message);
-      setUploading(false);
-      return;
+      return null;
     }
-
     const { data: urlData } = supabase.storage.from("cms-images").getPublicUrl(path);
-    const imageUrl = urlData.publicUrl;
+    return urlData.publicUrl;
+  };
 
-    // Insert image URL into current JSON content
-    try {
-      const currentContent = JSON.parse(form.content);
-      currentContent.image = imageUrl;
-      setForm({ ...form, content: JSON.stringify(currentContent, null, 2) });
-      toast.success("Image uploaded! URL added to content.");
-    } catch {
-      // If content isn't valid JSON, create new object
-      setForm({ ...form, content: JSON.stringify({ image: imageUrl }, null, 2) });
-      toast.success("Image uploaded!");
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    const imageUrl = await uploadToStorage(file);
+    if (imageUrl) {
+      try {
+        const currentContent = JSON.parse(contentHistory.current);
+        currentContent.image = imageUrl;
+        contentHistory.set(JSON.stringify(currentContent, null, 2));
+        toast.success("Image uploaded! URL added to content.");
+      } catch {
+        contentHistory.set(JSON.stringify({ image: imageUrl }, null, 2));
+        toast.success("Image uploaded!");
+      }
     }
     setUploading(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
@@ -112,26 +152,17 @@ const AdminPages = () => {
   const handleReplaceImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !replacingKey) return;
-
     setUploading(true);
-    const ext = file.name.split(".").pop();
-    const path = `${form.page_slug}/${form.section_key}/${Date.now()}.${ext}`;
-
-    const { error } = await supabase.storage.from("cms-images").upload(path, file, { upsert: true });
-    if (error) {
-      toast.error("Upload failed: " + error.message);
-      setUploading(false);
-      return;
-    }
-
-    const { data: urlData } = supabase.storage.from("cms-images").getPublicUrl(path);
-    try {
-      const currentContent = JSON.parse(form.content);
-      currentContent[replacingKey] = urlData.publicUrl;
-      setForm({ ...form, content: JSON.stringify(currentContent, null, 2) });
-      toast.success(`Image "${replacingKey}" replaced!`);
-    } catch {
-      toast.error("Invalid JSON content");
+    const imageUrl = await uploadToStorage(file);
+    if (imageUrl) {
+      try {
+        const currentContent = JSON.parse(contentHistory.current);
+        currentContent[replacingKey] = imageUrl;
+        contentHistory.set(JSON.stringify(currentContent, null, 2));
+        toast.success(`Image "${replacingKey}" replaced!`);
+      } catch {
+        toast.error("Invalid JSON content");
+      }
     }
     setUploading(false);
     setReplacingKey(null);
@@ -140,7 +171,7 @@ const AdminPages = () => {
 
   const getImageKeysFromContent = (): { key: string; url: string }[] => {
     try {
-      const parsed = JSON.parse(form.content);
+      const parsed = JSON.parse(contentHistory.current);
       return Object.entries(parsed)
         .filter(([, v]) => typeof v === "string" && (v as string).match(/\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i))
         .map(([key, url]) => ({ key, url: url as string }));
@@ -156,7 +187,6 @@ const AdminPages = () => {
     setConfirmAction(null);
   };
 
-  // Extract unique page slugs for grouping
   const groupedPages = pages.reduce<Record<string, PageContent[]>>((acc, p) => {
     if (!acc[p.page_slug]) acc[p.page_slug] = [];
     acc[p.page_slug].push(p);
@@ -183,7 +213,7 @@ const AdminPages = () => {
 
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-heading font-bold text-foreground">Page Content</h2>
-        <Button onClick={() => { setEditingId(null); setForm({ page_slug: "", section_key: "", content: "{}" }); }}>
+        <Button onClick={resetForm}>
           <Plus className="h-4 w-4 mr-2" /> Add Section
         </Button>
       </div>
@@ -191,27 +221,72 @@ const AdminPages = () => {
       {/* Editor */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-lg">{editingId ? "Edit Section" : "New Section"}</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg">{editingId ? "Edit Section" : "New Section"}</CardTitle>
+            {/* Undo / Redo */}
+            <div className="flex items-center gap-1">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                disabled={!contentHistory.canUndo}
+                onClick={() => { contentHistory.undo(); toast.info("Undo applied"); }}
+                title="Undo"
+              >
+                <Undo2 className="h-4 w-4" />
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                disabled={!contentHistory.canRedo}
+                onClick={() => { contentHistory.redo(); toast.info("Redo applied"); }}
+                title="Redo"
+              >
+                <Redo2 className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Page Slug</Label>
-              <Input
-                placeholder="e.g. home, about, contact"
-                value={form.page_slug}
-                onChange={(e) => setForm({ ...form, page_slug: e.target.value })}
-                disabled={!!editingId}
-              />
+              {editingId ? (
+                <Input value={pageSlug} disabled />
+              ) : (
+                <Select value={pageSlug} onValueChange={setPageSlug}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a page..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {PAGE_SLUGS.map((p) => (
+                      <SelectItem key={p.value} value={p.value}>
+                        {p.label} <span className="text-muted-foreground ml-1 text-xs">({p.value})</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
             </div>
             <div className="space-y-2">
               <Label>Section Key</Label>
-              <Input
-                placeholder="e.g. hero, features, cta"
-                value={form.section_key}
-                onChange={(e) => setForm({ ...form, section_key: e.target.value })}
-                disabled={!!editingId}
-              />
+              {editingId ? (
+                <Input value={sectionKey} disabled />
+              ) : (
+                <Select value={sectionKey} onValueChange={setSectionKey}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a section..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SECTION_KEYS.map((s) => (
+                      <SelectItem key={s.value} value={s.value}>
+                        {s.label} <span className="text-muted-foreground ml-1 text-xs">({s.value})</span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
             </div>
           </div>
 
@@ -221,18 +296,12 @@ const AdminPages = () => {
               <Image className="h-4 w-4" /> Upload Image
             </Label>
             <div className="flex items-center gap-3">
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="hidden"
-              />
+              <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
-                disabled={uploading || (!form.page_slug && !editingId)}
+                disabled={uploading || (!pageSlug && !editingId)}
                 onClick={() => fileInputRef.current?.click()}
               >
                 <Upload className="h-4 w-4 mr-2" />
@@ -250,13 +319,7 @@ const AdminPages = () => {
               <Label className="flex items-center gap-2">
                 <Image className="h-4 w-4" /> Current Images
               </Label>
-              <input
-                ref={replaceInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleReplaceImage}
-                className="hidden"
-              />
+              <input ref={replaceInputRef} type="file" accept="image/*" onChange={handleReplaceImage} className="hidden" />
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {getImageKeysFromContent().map(({ key, url }) => (
                   <div key={key} className="border border-border rounded-lg p-2 space-y-2">
@@ -268,13 +331,9 @@ const AdminPages = () => {
                         variant="outline"
                         size="sm"
                         disabled={uploading}
-                        onClick={() => {
-                          setReplacingKey(key);
-                          replaceInputRef.current?.click();
-                        }}
+                        onClick={() => { setReplacingKey(key); replaceInputRef.current?.click(); }}
                       >
-                        <RefreshCw className="h-3 w-3 mr-1" />
-                        Replace
+                        <RefreshCw className="h-3 w-3 mr-1" /> Replace
                       </Button>
                     </div>
                   </div>
@@ -288,8 +347,8 @@ const AdminPages = () => {
             <Textarea
               rows={8}
               className="font-mono text-sm"
-              value={form.content}
-              onChange={(e) => setForm({ ...form, content: e.target.value })}
+              value={contentHistory.current}
+              onChange={(e) => contentHistory.set(e.target.value)}
             />
           </div>
           <Button onClick={() => setConfirmAction({ type: "save" })}>
@@ -305,28 +364,31 @@ const AdminPages = () => {
         <p className="text-muted-foreground">No page content yet.</p>
       ) : (
         <div className="space-y-6">
-          {Object.entries(groupedPages).map(([slug, sections]) => (
-            <div key={slug}>
-              <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-                📄 {slug}
-              </h3>
-              <div className="grid gap-2">
-                {sections.map((p) => (
-                  <Card key={p.id} className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => handleEdit(p)}>
-                    <CardContent className="flex items-center justify-between py-3 px-4">
-                      <div>
-                        <p className="font-medium text-sm text-foreground">{p.section_key}</p>
-                        <p className="text-xs text-muted-foreground">Updated: {new Date(p.updated_at).toLocaleDateString()}</p>
-                      </div>
-                      <Button variant="ghost" size="icon" onClick={(e) => { e.stopPropagation(); setConfirmAction({ type: "delete", id: p.id }); }}>
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))}
+          {Object.entries(groupedPages).map(([slug, sections]) => {
+            const pageLabel = PAGE_SLUGS.find((p) => p.value === slug)?.label || slug;
+            return (
+              <div key={slug}>
+                <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                  📄 {pageLabel} <span className="text-xs font-normal">({slug})</span>
+                </h3>
+                <div className="grid gap-2">
+                  {sections.map((p) => (
+                    <Card key={p.id} className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => handleEdit(p)}>
+                      <CardContent className="flex items-center justify-between py-3 px-4">
+                        <div>
+                          <p className="font-medium text-sm text-foreground">{p.section_key}</p>
+                          <p className="text-xs text-muted-foreground">Updated: {new Date(p.updated_at).toLocaleDateString()}</p>
+                        </div>
+                        <Button variant="ghost" size="icon" onClick={(e) => { e.stopPropagation(); setConfirmAction({ type: "delete", id: p.id }); }}>
+                          <Trash2 className="h-4 w-4 text-destructive" />
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
