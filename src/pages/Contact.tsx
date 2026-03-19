@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const CONTACT_FORM_SLUG = "contact-form";
 
@@ -21,6 +22,10 @@ const helpOptions = [
 ];
 
 const Contact = () => {
+  const { get } = usePageContent("contact");
+  const heroHeading = get("hero", "heading", "Let's talk about what you need to modernize");
+  const heroSub = get("hero", "subheading", "Whether you need a focused product, a transformation roadmap, or a connected operating architecture, we'll help you identify the smartest next step.");
+
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -76,10 +81,8 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Left */}
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-              <h1 className="hero-heading mb-6">Let's talk about what you need to modernize</h1>
-              <p className="section-subheading mb-12">
-                Whether you need a focused product, a transformation roadmap, or a connected operating architecture, we'll help you identify the smartest next step.
-              </p>
+              <h1 className="hero-heading mb-6">{heroHeading}</h1>
+              <p className="section-subheading mb-12">{heroSub}</p>
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">

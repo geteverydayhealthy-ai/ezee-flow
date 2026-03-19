@@ -11,6 +11,8 @@ interface SolutionPageProps {
   whatItSolves: string;
   whatItIncludes: string;
   whyItMatters: string;
+  ctaHeading?: string;
+  ctaLabel?: string;
   images?: {
     solves?: string;
     includes?: string;
@@ -18,7 +20,7 @@ interface SolutionPageProps {
   };
 }
 
-const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, whatItIncludes, whyItMatters, images }: SolutionPageProps) => {
+const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, whatItIncludes, whyItMatters, ctaHeading, ctaLabel, images }: SolutionPageProps) => {
   const { get } = usePageContent(pageSlug);
 
   const h = get("hero", "heading", heading);
@@ -26,6 +28,15 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
   const solves = get("content", "whatItSolves", whatItSolves);
   const includes = get("content", "whatItIncludes", whatItIncludes);
   const matters = get("content", "whyItMatters", whyItMatters);
+  const cmsImgSolves = get("images", "solves", "");
+  const cmsImgIncludes = get("images", "includes", "");
+  const cmsImgMatters = get("images", "matters", "");
+  const finalCtaHeading = get("cta", "heading", ctaHeading || "Let's talk about what you need");
+  const finalCtaLabel = get("cta", "ctaLabel", ctaLabel || "Talk to our team");
+
+  const imgSolves = cmsImgSolves || images?.solves;
+  const imgIncludes = cmsImgIncludes || images?.includes;
+  const imgMatters = cmsImgMatters || images?.matters;
 
   return (
     <Layout>
@@ -45,8 +56,8 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {images?.solves ? (
-                <img src={images.solves} alt={`${h} - What it solves`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
+              {imgSolves ? (
+                <img src={imgSolves} alt={`${h} - What it solves`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
               ) : (
                 <div className="bg-accent w-full h-full rounded-2xl" />
               )}
@@ -65,8 +76,8 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {images?.includes ? (
-                <img src={images.includes} alt={`${h} - What it includes`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
+              {imgIncludes ? (
+                <img src={imgIncludes} alt={`${h} - What it includes`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
               ) : (
                 <div className="bg-card-mint w-full h-full rounded-2xl" />
               )}
@@ -93,8 +104,8 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {images?.matters ? (
-                <img src={images.matters} alt={`${h} - Why it matters`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
+              {imgMatters ? (
+                <img src={imgMatters} alt={`${h} - Why it matters`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
               ) : (
                 <div className="bg-card-sage w-full h-full rounded-2xl" />
               )}
@@ -103,7 +114,7 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
         </div>
       </section>
 
-      <CTASection heading="Let's talk about what you need" ctaLabel="Talk to our team" ctaHref="/contact" />
+      <CTASection heading={finalCtaHeading} ctaLabel={finalCtaLabel} ctaHref="/contact" />
     </Layout>
   );
 };

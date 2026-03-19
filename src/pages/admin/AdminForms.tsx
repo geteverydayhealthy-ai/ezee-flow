@@ -10,6 +10,7 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import { Plus, Save, Trash2, Copy } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
+import ConfirmDialog from "@/components/admin/ConfirmDialog";
 
 type Form = Tables<"forms">;
 
@@ -18,6 +19,7 @@ const AdminForms = () => {
   const [forms, setForms] = useState<Form[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [confirmAction, setConfirmAction] = useState<{ type: "save" | "delete"; id?: string } | null>(null);
   const [form, setForm] = useState({
     name: "",
     slug: "",
@@ -87,8 +89,31 @@ const AdminForms = () => {
     else { toast.success("Deleted!"); fetchForms(); }
   };
 
+  const handleConfirm = () => {
+    if (!confirmAction) return;
+    if (confirmAction.type === "save") handleSave();
+    if (confirmAction.type === "delete" && confirmAction.id) handleDelete(confirmAction.id);
+    setConfirmAction(null);
+  };
+
   return (
     <div className="space-y-6">
+      <ConfirmDialog
+        open={!!confirmAction}
+        onOpenChange={(open) => !open && setConfirmAction(null)}
+        title={confirmAction?.type === "delete" ? "Delete this form?" : "Save this form?"}
+        description={
+          confirmAction?.type === "delete"
+            ? "This action cannot be undone. The form and all its configuration will be permanently deleted."
+            : editingId
+            ? "Do you really want to update this form? Changes will affect the live website."
+            : "Do you really want to create this new form?"
+        }
+        onConfirm={handleConfirm}
+        confirmLabel={confirmAction?.type === "delete" ? "Yes, delete" : "Yes, proceed"}
+        variant={confirmAction?.type === "delete" ? "destructive" : "default"}
+      />
+
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-heading font-bold text-foreground">Form Builder</h2>
         <Button onClick={resetForm}>
@@ -117,19 +142,13 @@ const AdminForms = () => {
           </div>
           <div className="space-y-2">
             <Label>Fields (JSON Array)</Label>
-            <Textarea
-              rows={6}
-              className="font-mono text-sm"
-              value={form.fields}
-              onChange={(e) => setForm({ ...form, fields: e.target.value })}
-              placeholder='[{"name":"email","type":"email","label":"Email","required":true}]'
-            />
+            <Textarea rows={6} className="font-mono text-sm" value={form.fields} onChange={(e) => setForm({ ...form, fields: e.target.value })} placeholder='[{"name":"email","type":"email","label":"Email","required":true}]' />
           </div>
           <div className="flex items-center gap-2">
             <Switch checked={form.is_active} onCheckedChange={(v) => setForm({ ...form, is_active: v })} />
             <Label>Active</Label>
           </div>
-          <Button onClick={handleSave}>
+          <Button onClick={() => setConfirmAction({ type: "save" })}>
             <Save className="h-4 w-4 mr-2" /> {editingId ? "Update" : "Create"}
           </Button>
         </CardContent>
@@ -154,7 +173,7 @@ const AdminForms = () => {
                   <Button variant="ghost" size="icon" onClick={(e) => { e.stopPropagation(); navigator.clipboard.writeText(f.id); toast.success("Form ID copied!"); }}>
                     <Copy className="h-4 w-4" />
                   </Button>
-                  <Button variant="ghost" size="icon" onClick={(e) => { e.stopPropagation(); handleDelete(f.id); }}>
+                  <Button variant="ghost" size="icon" onClick={(e) => { e.stopPropagation(); setConfirmAction({ type: "delete", id: f.id }); }}>
                     <Trash2 className="h-4 w-4 text-destructive" />
                   </Button>
                 </div>
