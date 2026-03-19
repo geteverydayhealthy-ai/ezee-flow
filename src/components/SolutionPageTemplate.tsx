@@ -121,9 +121,9 @@ const SolutionPageTemplate = ({
       </section>
 
       {/* ── Section 2: What it includes ── */}
-      <section className="py-20 lg:py-28 bg-accent/40">
+      <section className="py-14 sm:py-20 lg:py-28 bg-accent/40">
         <div className="section-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14 lg:gap-20 items-start">
             <motion.div {...scaleIn} className="rounded-2xl aspect-[4/3] overflow-hidden bg-card lg:order-1">
               <img src={imgIncludes} alt={`${h} - What it includes`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
             </motion.div>
