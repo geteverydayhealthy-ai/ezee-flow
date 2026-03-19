@@ -114,7 +114,7 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
         </div>
       </section>
 
-      <CTASection heading="Let's talk about what you need" ctaLabel="Talk to our team" ctaHref="/contact" />
+      <CTASection heading={finalCtaHeading} ctaLabel={finalCtaLabel} ctaHref="/contact" />
     </Layout>
   );
 };
