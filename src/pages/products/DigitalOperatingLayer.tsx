@@ -6,6 +6,7 @@ import imgMatters from "@/assets/visuals/v5-dol-governance.jpg";
 
 const DigitalOperatingLayer = () => (
   <ProductPageTemplate
+    pageSlug="digital-operating-layer"
     seoTitle="Digital Operating Layer for Insurance | Ezee Technologies"
     heading="The Digital Operating Layer for Insurance"
     subheading="A modern technology layer that sits above legacy systems and helps insurers modernize distribution, workflows, customer experience, integrations, and intelligence without replacing their core systems."

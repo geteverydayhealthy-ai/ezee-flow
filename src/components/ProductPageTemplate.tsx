@@ -5,8 +5,10 @@ import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
 import RelatedLinks from "@/components/RelatedLinks";
+import { usePageContent } from "@/hooks/usePageContent";
 
 interface ProductPageProps {
+  pageSlug: string;
   seoTitle: string;
   heading: string;
   subheading: string;
@@ -26,6 +28,7 @@ interface ProductPageProps {
 }
 
 const ProductPageTemplate = ({
+  pageSlug,
   heading,
   subheading,
   supportingLine,
@@ -35,18 +38,27 @@ const ProductPageTemplate = ({
   faq,
   children,
 }: ProductPageProps) => {
+  const { get } = usePageContent(pageSlug);
+
+  const h = get("hero", "heading", heading);
+  const sub = get("hero", "subheading", subheading);
+  const support = get("hero", "supportingLine", supportingLine || "");
+  const outcome = get("outcomeLine", "text", outcomeLine || "");
+  const ctaHeading = get("cta", "heading", "Let's build the right digital layer for your insurance business");
+  const ctaLabel = get("cta", "ctaLabel", "Book a Demo");
+
   return (
     <Layout>
       <PageHero
-        heading={heading}
-        subheading={subheading}
+        heading={h}
+        subheading={sub}
         primaryCta={{ label: "Book a Demo", href: "/contact" }}
         secondaryCta={{ label: "Explore Platform", href: "/products/digital-operating-layer" }}
       />
 
-      {supportingLine && (
+      {support && (
         <div className="section-container -mt-8 mb-16">
-          <p className="text-center text-lg font-medium text-primary">{supportingLine}</p>
+          <p className="text-center text-lg font-medium text-primary">{support}</p>
         </div>
       )}
 
@@ -94,10 +106,10 @@ const ProductPageTemplate = ({
         </section>
       ))}
 
-      {outcomeLine && (
+      {outcome && (
         <section className="py-16 bg-primary text-primary-foreground">
           <div className="section-container text-center">
-            <p className="text-2xl sm:text-3xl font-bold">{outcomeLine}</p>
+            <p className="text-2xl sm:text-3xl font-bold">{outcome}</p>
           </div>
         </section>
       )}
@@ -121,8 +133,8 @@ const ProductPageTemplate = ({
       <RelatedLinks links={relatedLinks} />
 
       <CTASection
-        heading="Let's build the right digital layer for your insurance business"
-        ctaLabel="Book a Demo"
+        heading={ctaHeading}
+        ctaLabel={ctaLabel}
         ctaHref="/contact"
       />
     </Layout>

@@ -6,6 +6,7 @@ import imgMatters from "@/assets/visuals/v5-agency-visibility.jpg";
 
 const AgencyDashboard = () => (
   <ProductPageTemplate
+    pageSlug="agency-dashboard"
     seoTitle="Agency Dashboard for Insurance Distribution | Ezee Technologies"
     heading="Agency Dashboard"
     subheading="A distribution management platform for brokers, agents, channel teams, and partner networks. Giving insurers the visibility and control they need to scale distribution intelligently."

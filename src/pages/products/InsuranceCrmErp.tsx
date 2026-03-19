@@ -6,6 +6,7 @@ import imgMatters from "@/assets/visuals/v5-crm-partnership.jpg";
 
 const InsuranceCrmErp = () => (
   <ProductPageTemplate
+    pageSlug="insurance-crm-erp"
     seoTitle="Insurance CRM + ERP | Ezee Technologies"
     heading="Insurance CRM + ERP"
     subheading="A structured operating system for insurance sales, servicing, tasks, reporting, and internal coordination. Designed around how insurance teams actually work, not how generic CRM vendors think they should."
