@@ -244,6 +244,45 @@ const AdminPages = () => {
             </div>
           </div>
 
+          {/* Image Previews with Replace */}
+          {getImageKeysFromContent().length > 0 && (
+            <div className="space-y-3">
+              <Label className="flex items-center gap-2">
+                <Image className="h-4 w-4" /> Current Images
+              </Label>
+              <input
+                ref={replaceInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleReplaceImage}
+                className="hidden"
+              />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {getImageKeysFromContent().map(({ key, url }) => (
+                  <div key={key} className="border border-border rounded-lg p-2 space-y-2">
+                    <img src={url} alt={key} className="w-full h-32 object-cover rounded-md bg-muted" />
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-muted-foreground truncate">{key}</span>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        disabled={uploading}
+                        onClick={() => {
+                          setReplacingKey(key);
+                          replaceInputRef.current?.click();
+                        }}
+                      >
+                        <RefreshCw className="h-3 w-3 mr-1" />
+                        Replace
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="space-y-2">
             <Label>Content (JSON)</Label>
             <Textarea
