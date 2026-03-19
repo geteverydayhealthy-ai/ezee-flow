@@ -73,7 +73,7 @@ const Index = () => {
         </svg>
 
         <div className="section-container relative z-10 w-full">
-          <div className="relative min-h-[600px] flex items-center justify-center">
+          <div className="relative min-h-[400px] sm:min-h-[600px] flex items-center justify-center">
             <div className="hidden lg:block">
               {floatingCards.map((card, i) => (
                 <motion.div
