@@ -53,7 +53,6 @@ const App = () => {
 
   const handleLoadingComplete = useCallback(() => {
     setLoading(false);
-    sessionStorage.setItem("ezee-loaded", "true");
   }, []);
 
   return (
