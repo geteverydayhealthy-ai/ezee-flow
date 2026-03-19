@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Plus, Save, Trash2, Upload, Image } from "lucide-react";
+import { Plus, Save, Trash2, Upload, Image, RefreshCw } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
 
