@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Plus, Save, Trash2, Upload, Image } from "lucide-react";
+import { Plus, Save, Trash2, Upload, Image, RefreshCw } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 import ConfirmDialog from "@/components/admin/ConfirmDialog";
 
@@ -21,7 +21,9 @@ const AdminPages = () => {
   const [form, setForm] = useState({ page_slug: "", section_key: "", content: "{}" });
   const [confirmAction, setConfirmAction] = useState<{ type: "save" | "delete"; id?: string } | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [replacingKey, setReplacingKey] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const replaceInputRef = useRef<HTMLInputElement>(null);
 
   const fetchPages = async () => {
     const { data } = await supabase.from("page_content").select("*").order("page_slug");
@@ -105,6 +107,46 @@ const AdminPages = () => {
     }
     setUploading(false);
     if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleReplaceImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !replacingKey) return;
+
+    setUploading(true);
+    const ext = file.name.split(".").pop();
+    const path = `${form.page_slug}/${form.section_key}/${Date.now()}.${ext}`;
+
+    const { error } = await supabase.storage.from("cms-images").upload(path, file, { upsert: true });
+    if (error) {
+      toast.error("Upload failed: " + error.message);
+      setUploading(false);
+      return;
+    }
+
+    const { data: urlData } = supabase.storage.from("cms-images").getPublicUrl(path);
+    try {
+      const currentContent = JSON.parse(form.content);
+      currentContent[replacingKey] = urlData.publicUrl;
+      setForm({ ...form, content: JSON.stringify(currentContent, null, 2) });
+      toast.success(`Image "${replacingKey}" replaced!`);
+    } catch {
+      toast.error("Invalid JSON content");
+    }
+    setUploading(false);
+    setReplacingKey(null);
+    if (replaceInputRef.current) replaceInputRef.current.value = "";
+  };
+
+  const getImageKeysFromContent = (): { key: string; url: string }[] => {
+    try {
+      const parsed = JSON.parse(form.content);
+      return Object.entries(parsed)
+        .filter(([, v]) => typeof v === "string" && (v as string).match(/\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i))
+        .map(([key, url]) => ({ key, url: url as string }));
+    } catch {
+      return [];
+    }
   };
 
   const handleConfirm = () => {
@@ -201,6 +243,45 @@ const AdminPages = () => {
               </span>
             </div>
           </div>
+
+          {/* Image Previews with Replace */}
+          {getImageKeysFromContent().length > 0 && (
+            <div className="space-y-3">
+              <Label className="flex items-center gap-2">
+                <Image className="h-4 w-4" /> Current Images
+              </Label>
+              <input
+                ref={replaceInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleReplaceImage}
+                className="hidden"
+              />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {getImageKeysFromContent().map(({ key, url }) => (
+                  <div key={key} className="border border-border rounded-lg p-2 space-y-2">
+                    <img src={url} alt={key} className="w-full h-32 object-cover rounded-md bg-muted" />
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium text-muted-foreground truncate">{key}</span>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        disabled={uploading}
+                        onClick={() => {
+                          setReplacingKey(key);
+                          replaceInputRef.current?.click();
+                        }}
+                      >
+                        <RefreshCw className="h-3 w-3 mr-1" />
+                        Replace
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="space-y-2">
             <Label>Content (JSON)</Label>
