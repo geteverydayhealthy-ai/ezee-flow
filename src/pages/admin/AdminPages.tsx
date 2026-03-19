@@ -21,7 +21,9 @@ const AdminPages = () => {
   const [form, setForm] = useState({ page_slug: "", section_key: "", content: "{}" });
   const [confirmAction, setConfirmAction] = useState<{ type: "save" | "delete"; id?: string } | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [replacingKey, setReplacingKey] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const replaceInputRef = useRef<HTMLInputElement>(null);
 
   const fetchPages = async () => {
     const { data } = await supabase.from("page_content").select("*").order("page_slug");
