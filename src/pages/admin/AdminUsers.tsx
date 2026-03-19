@@ -122,7 +122,7 @@ const AdminUsers = () => {
               <CardContent className="flex items-center justify-between py-4">
                 <div>
                   <p className="font-semibold text-foreground">
-                    {u.profiles?.display_name ?? u.user_id}
+                    {u.display_name ?? u.user_id}
                   </p>
                   <div className="flex items-center gap-2 mt-1">
                     <Badge variant={roleColor(u.role)}>{u.role}</Badge>
