@@ -383,10 +383,10 @@ const Index = () => {
       </section>
 
       {/* One-stop positioning */}
-      <section className="py-16 bg-primary text-primary-foreground">
+      <section className="py-12 sm:py-16 bg-primary text-primary-foreground">
         <div className="section-container text-center max-w-3xl mx-auto">
-          <p className="text-2xl sm:text-3xl font-bold mb-4">{posHeading}</p>
-          <p className="text-primary-foreground/70 text-sm leading-relaxed">{posDesc}</p>
+          <p className="text-xl sm:text-2xl md:text-3xl font-bold mb-4">{posHeading}</p>
+          <p className="text-primary-foreground/70 text-xs sm:text-sm leading-relaxed">{posDesc}</p>
         </div>
       </section>
 

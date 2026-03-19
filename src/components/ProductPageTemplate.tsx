@@ -102,9 +102,9 @@ const ProductPageTemplate = ({
       ))}
 
       {outcome && (
-        <section className="py-16 bg-primary text-primary-foreground">
+        <section className="py-12 sm:py-16 bg-primary text-primary-foreground">
           <div className="section-container text-center">
-            <p className="text-2xl sm:text-3xl font-bold">{outcome}</p>
+            <p className="text-xl sm:text-2xl md:text-3xl font-bold">{outcome}</p>
           </div>
         </section>
       )}
