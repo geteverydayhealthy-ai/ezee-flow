@@ -109,6 +109,46 @@ const AdminPages = () => {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
+  const handleReplaceImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !replacingKey) return;
+
+    setUploading(true);
+    const ext = file.name.split(".").pop();
+    const path = `${form.page_slug}/${form.section_key}/${Date.now()}.${ext}`;
+
+    const { error } = await supabase.storage.from("cms-images").upload(path, file, { upsert: true });
+    if (error) {
+      toast.error("Upload failed: " + error.message);
+      setUploading(false);
+      return;
+    }
+
+    const { data: urlData } = supabase.storage.from("cms-images").getPublicUrl(path);
+    try {
+      const currentContent = JSON.parse(form.content);
+      currentContent[replacingKey] = urlData.publicUrl;
+      setForm({ ...form, content: JSON.stringify(currentContent, null, 2) });
+      toast.success(`Image "${replacingKey}" replaced!`);
+    } catch {
+      toast.error("Invalid JSON content");
+    }
+    setUploading(false);
+    setReplacingKey(null);
+    if (replaceInputRef.current) replaceInputRef.current.value = "";
+  };
+
+  const getImageKeysFromContent = (): { key: string; url: string }[] => {
+    try {
+      const parsed = JSON.parse(form.content);
+      return Object.entries(parsed)
+        .filter(([, v]) => typeof v === "string" && (v as string).match(/\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i))
+        .map(([key, url]) => ({ key, url: url as string }));
+    } catch {
+      return [];
+    }
+  };
+
   const handleConfirm = () => {
     if (!confirmAction) return;
     if (confirmAction.type === "save") handleSave();
