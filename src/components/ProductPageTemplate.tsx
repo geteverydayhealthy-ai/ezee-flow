@@ -69,7 +69,7 @@ const ProductPageTemplate = ({
         <section key={i} className={`py-14 sm:py-20 lg:py-28 ${i % 2 === 0 ? "" : "bg-accent/50"}`}>
           <div className="section-container">
             <motion.div
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center ${section.visual === "left" ? "lg:flex-row-reverse" : ""}`}
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center ${section.visual === "left" ? "lg:flex-row-reverse" : ""}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
