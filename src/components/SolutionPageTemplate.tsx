@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { CheckCircle2 } from "lucide-react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
@@ -20,7 +21,39 @@ interface SolutionPageProps {
   };
 }
 
-const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, whatItIncludes, whyItMatters, ctaHeading, ctaLabel, images }: SolutionPageProps) => {
+/** Split a long paragraph into individual points by sentence boundaries */
+const splitIntoPoints = (text: string): string[] => {
+  return text
+    .split(/\.\s+/)
+    .map((s) => s.replace(/\.$/, "").trim())
+    .filter((s) => s.length > 15);
+};
+
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.5, ease: "easeOut" },
+};
+
+const scaleIn = {
+  initial: { opacity: 0, scale: 0.96 },
+  whileInView: { opacity: 1, scale: 1 },
+  viewport: { once: true },
+  transition: { duration: 0.6, ease: "easeOut" },
+};
+
+const SolutionPageTemplate = ({
+  pageSlug,
+  heading,
+  subheading,
+  whatItSolves,
+  whatItIncludes,
+  whyItMatters,
+  ctaHeading,
+  ctaLabel,
+  images,
+}: SolutionPageProps) => {
   const { get } = usePageContent(pageSlug);
 
   const h = get("hero", "heading", heading);
@@ -38,26 +71,50 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
   const imgIncludes = cmsImgIncludes || images?.includes;
   const imgMatters = cmsImgMatters || images?.matters;
 
+  const solvesPoints = splitIntoPoints(solves);
+  const includesPoints = splitIntoPoints(includes);
+  const mattersPoints = splitIntoPoints(matters);
+
   return (
     <Layout>
       <PageHero heading={h} subheading={sub} primaryCta={{ label: "Talk to our team", href: "/contact" }} />
 
-      <section className="section-spacing">
+      {/* ── Section 1: What it solves ── */}
+      <section className="py-20 lg:py-28">
         <div className="section-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-6">What it solves</h2>
-              <p className="text-muted-foreground leading-relaxed">{solves}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+            <motion.div {...fadeUp} className="space-y-6">
+              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-primary">
+                <span className="w-8 h-px bg-primary" />
+                The Challenge
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold leading-tight text-foreground">
+                What it solves
+              </h2>
+              {solvesPoints.length > 1 ? (
+                <div className="space-y-4 pt-2">
+                  {/* Lead paragraph */}
+                  <p className="text-base text-muted-foreground leading-relaxed">
+                    {solvesPoints[0]}.
+                  </p>
+                  {/* Remaining as structured points */}
+                  <ul className="space-y-3 pt-2">
+                    {solvesPoints.slice(1).map((point, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                        <span className="text-sm text-muted-foreground leading-relaxed">{point}.</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <p className="text-base text-muted-foreground leading-relaxed">{solves}</p>
+              )}
             </motion.div>
-            <motion.div
-              className="rounded-2xl aspect-[4/3] overflow-hidden bg-card p-2"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+
+            <motion.div {...scaleIn} className="rounded-2xl aspect-[4/3] overflow-hidden bg-muted/30">
               {imgSolves ? (
-                <img src={imgSolves} alt={`${h} - What it solves`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
+                <img src={imgSolves} alt={`${h} - What it solves`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
               ) : (
                 <div className="bg-accent w-full h-full rounded-2xl" />
               )}
@@ -66,48 +123,87 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
         </div>
       </section>
 
-      <section className="section-spacing bg-accent/50">
+      {/* ── Section 2: What it includes ── */}
+      <section className="py-20 lg:py-28 bg-accent/40">
         <div className="section-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div
-              className="rounded-2xl aspect-[4/3] overflow-hidden bg-card p-2 lg:order-1"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+            <motion.div {...scaleIn} className="rounded-2xl aspect-[4/3] overflow-hidden bg-card lg:order-1">
               {imgIncludes ? (
-                <img src={imgIncludes} alt={`${h} - What it includes`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
+                <img src={imgIncludes} alt={`${h} - What it includes`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
               ) : (
-                <div className="bg-card-mint w-full h-full rounded-2xl" />
+                <div className="bg-card w-full h-full rounded-2xl" />
               )}
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="lg:order-2">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-6">What it includes</h2>
-              <p className="text-muted-foreground leading-relaxed">{includes}</p>
+
+            <motion.div {...fadeUp} className="lg:order-2 space-y-6">
+              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-primary">
+                <span className="w-8 h-px bg-primary" />
+                What's Inside
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold leading-tight text-foreground">
+                What it includes
+              </h2>
+              {includesPoints.length > 1 ? (
+                <div className="space-y-3 pt-2">
+                  {includesPoints.map((point, i) => (
+                    <motion.div
+                      key={i}
+                      className="flex items-start gap-3 p-3 rounded-xl bg-background/70 border border-border/50"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.35, delay: i * 0.06 }}
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-muted-foreground leading-relaxed">{point}.</span>
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-base text-muted-foreground leading-relaxed">{includes}</p>
+              )}
             </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="section-spacing">
+      {/* ── Section 3: Why it matters ── */}
+      <section className="py-20 lg:py-28">
         <div className="section-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <h2 className="text-2xl sm:text-3xl font-bold mb-6">Why it matters</h2>
-              <p className="text-muted-foreground leading-relaxed">{matters}</p>
-            </motion.div>
-            <motion.div
-              className="rounded-2xl aspect-[4/3] overflow-hidden bg-card p-2"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              {imgMatters ? (
-                <img src={imgMatters} alt={`${h} - Why it matters`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
+            <motion.div {...fadeUp} className="space-y-6">
+              <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-primary">
+                <span className="w-8 h-px bg-primary" />
+                The Impact
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-bold leading-tight text-foreground">
+                Why it matters
+              </h2>
+              {mattersPoints.length > 1 ? (
+                <div className="space-y-5 pt-2">
+                  {mattersPoints.map((point, i) => (
+                    <motion.div
+                      key={i}
+                      className="relative pl-6 border-l-2 border-primary/20"
+                      initial={{ opacity: 0, y: 12 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.35, delay: i * 0.08 }}
+                    >
+                      <p className="text-sm text-muted-foreground leading-relaxed">{point}.</p>
+                    </motion.div>
+                  ))}
+                </div>
               ) : (
-                <div className="bg-card-sage w-full h-full rounded-2xl" />
+                <p className="text-base text-muted-foreground leading-relaxed">{matters}</p>
+              )}
+            </motion.div>
+
+            <motion.div {...scaleIn} className="rounded-2xl aspect-[4/3] overflow-hidden bg-muted/30">
+              {imgMatters ? (
+                <img src={imgMatters} alt={`${h} - Why it matters`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
+              ) : (
+                <div className="bg-accent w-full h-full rounded-2xl" />
               )}
             </motion.div>
           </div>
