@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
-import imgMission from "@/assets/visuals/v5-happy-team.jpg";
+import imgMission from "@/assets/visuals/v8-team-collaboration.jpg";
 import imgVision from "@/assets/visuals/v5-about-infrastructure.jpg";
 import { usePageContent } from "@/hooks/usePageContent";
 
