@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const CONTACT_FORM_SLUG = "contact-form";
 
