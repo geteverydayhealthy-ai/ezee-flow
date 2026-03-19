@@ -9,7 +9,7 @@ interface CTASectionProps {
 }
 
 const CTASection = ({ heading, subheading, ctaLabel, ctaHref }: CTASectionProps) => (
-  <section className="section-spacing bg-secondary text-secondary-foreground">
+  <section className="py-14 sm:py-20 lg:py-28 bg-secondary text-secondary-foreground">
     <div className="section-container text-center">
       <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight mb-6 max-w-3xl mx-auto">{heading}</h2>
       {subheading && <p className="text-lg text-secondary-foreground/70 max-w-2xl mx-auto mb-10">{subheading}</p>}
