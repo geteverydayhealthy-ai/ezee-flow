@@ -22,6 +22,10 @@ const helpOptions = [
 ];
 
 const Contact = () => {
+  const { get } = usePageContent("contact");
+  const heroHeading = get("hero", "heading", "Let's talk about what you need to modernize");
+  const heroSub = get("hero", "subheading", "Whether you need a focused product, a transformation roadmap, or a connected operating architecture, we'll help you identify the smartest next step.");
+
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
