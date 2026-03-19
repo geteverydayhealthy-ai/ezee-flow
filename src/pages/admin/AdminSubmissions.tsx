@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Eye, Trash2 } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
+import ConfirmDialog from "@/components/admin/ConfirmDialog";
 
 type Submission = Tables<"form_submissions"> & { forms?: { name: string } | null };
 
@@ -13,6 +14,7 @@ const AdminSubmissions = () => {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Submission | null>(null);
+  const [deleteId, setDeleteId] = useState<string | null>(null);
 
   const fetchSubmissions = async () => {
     const { data } = await supabase
@@ -38,6 +40,16 @@ const AdminSubmissions = () => {
 
   return (
     <div className="space-y-6">
+      <ConfirmDialog
+        open={!!deleteId}
+        onOpenChange={(open) => !open && setDeleteId(null)}
+        title="Delete this submission?"
+        description="This action cannot be undone. The form submission data will be permanently deleted."
+        onConfirm={() => { if (deleteId) handleDelete(deleteId); setDeleteId(null); }}
+        confirmLabel="Yes, delete"
+        variant="destructive"
+      />
+
       <h2 className="text-2xl font-heading font-bold text-foreground">Form Submissions</h2>
 
       {selected ? (
@@ -53,7 +65,7 @@ const AdminSubmissions = () => {
             <pre className="bg-muted p-4 rounded-lg text-sm font-mono overflow-auto max-h-96">
               {JSON.stringify(selected.data, null, 2)}
             </pre>
-            <Button variant="destructive" size="sm" onClick={() => handleDelete(selected.id)}>
+            <Button variant="destructive" size="sm" onClick={() => setDeleteId(selected.id)}>
               <Trash2 className="h-4 w-4 mr-2" /> Delete
             </Button>
           </CardContent>

@@ -10,10 +10,10 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { UserPlus, Trash2 } from "lucide-react";
 import type { Tables, Database } from "@/integrations/supabase/types";
+import ConfirmDialog from "@/components/admin/ConfirmDialog";
 
 type UserRole = Tables<"user_roles">;
 type AppRole = Database["public"]["Enums"]["app_role"];
-type Profile = Tables<"profiles">;
 
 type UserWithRole = UserRole & { display_name?: string | null };
 
@@ -23,6 +23,7 @@ const AdminUsers = () => {
   const [loading, setLoading] = useState(true);
   const [newUserId, setNewUserId] = useState("");
   const [newRole, setNewRole] = useState<AppRole>("editor");
+  const [confirmAction, setConfirmAction] = useState<{ type: "assign" | "remove"; id?: string } | null>(null);
 
   const fetchUsers = async () => {
     const { data: roles } = await supabase
@@ -67,6 +68,13 @@ const AdminUsers = () => {
     else { toast.success("Role removed!"); fetchUsers(); }
   };
 
+  const handleConfirm = () => {
+    if (!confirmAction) return;
+    if (confirmAction.type === "assign") handleAddRole();
+    if (confirmAction.type === "remove" && confirmAction.id) handleRemoveRole(confirmAction.id);
+    setConfirmAction(null);
+  };
+
   if (!isAdmin) {
     return <p className="text-muted-foreground">Only admins can manage users.</p>;
   }
@@ -79,6 +87,20 @@ const AdminUsers = () => {
 
   return (
     <div className="space-y-6">
+      <ConfirmDialog
+        open={!!confirmAction}
+        onOpenChange={(open) => !open && setConfirmAction(null)}
+        title={confirmAction?.type === "remove" ? "Remove this role?" : "Assign this role?"}
+        description={
+          confirmAction?.type === "remove"
+            ? "This will remove the user's role and revoke their access. Are you sure?"
+            : `Do you really want to assign the "${newRole}" role to this user?`
+        }
+        onConfirm={handleConfirm}
+        confirmLabel={confirmAction?.type === "remove" ? "Yes, remove" : "Yes, assign"}
+        variant={confirmAction?.type === "remove" ? "destructive" : "default"}
+      />
+
       <h2 className="text-2xl font-heading font-bold text-foreground">User Management</h2>
 
       <Card>
@@ -103,7 +125,7 @@ const AdminUsers = () => {
               </Select>
             </div>
             <div className="flex items-end">
-              <Button onClick={handleAddRole}>
+              <Button onClick={() => setConfirmAction({ type: "assign" })}>
                 <UserPlus className="h-4 w-4 mr-2" /> Assign
               </Button>
             </div>
@@ -129,7 +151,7 @@ const AdminUsers = () => {
                     <span className="text-xs text-muted-foreground font-mono">{u.user_id.slice(0, 8)}...</span>
                   </div>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => handleRemoveRole(u.id)}>
+                <Button variant="ghost" size="icon" onClick={() => setConfirmAction({ type: "remove", id: u.id })}>
                   <Trash2 className="h-4 w-4 text-destructive" />
                 </Button>
               </CardContent>

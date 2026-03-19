@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { Plus, Save, Trash2 } from "lucide-react";
 import type { Tables } from "@/integrations/supabase/types";
 import type { Database } from "@/integrations/supabase/types";
+import ConfirmDialog from "@/components/admin/ConfirmDialog";
 
 type BlogPost = Tables<"blog_posts">;
 type PostStatus = Database["public"]["Enums"]["post_status"];
@@ -21,6 +22,7 @@ const AdminBlog = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [confirmAction, setConfirmAction] = useState<{ type: "save" | "delete"; id?: string } | null>(null);
   const [form, setForm] = useState({
     title: "",
     slug: "",
@@ -95,6 +97,13 @@ const AdminBlog = () => {
     else { toast.success("Deleted!"); fetchPosts(); }
   };
 
+  const handleConfirm = () => {
+    if (!confirmAction) return;
+    if (confirmAction.type === "save") handleSave();
+    if (confirmAction.type === "delete" && confirmAction.id) handleDelete(confirmAction.id);
+    setConfirmAction(null);
+  };
+
   const statusColor = (s: PostStatus) => {
     if (s === "published") return "default";
     if (s === "draft") return "secondary";
@@ -103,6 +112,22 @@ const AdminBlog = () => {
 
   return (
     <div className="space-y-6">
+      <ConfirmDialog
+        open={!!confirmAction}
+        onOpenChange={(open) => !open && setConfirmAction(null)}
+        title={confirmAction?.type === "delete" ? "Delete this post?" : "Save this post?"}
+        description={
+          confirmAction?.type === "delete"
+            ? "This action cannot be undone. The blog post will be permanently deleted."
+            : editingId
+            ? "Do you really want to update this blog post? Changes will be reflected on the live website."
+            : "Do you really want to create this new blog post?"
+        }
+        onConfirm={handleConfirm}
+        confirmLabel={confirmAction?.type === "delete" ? "Yes, delete" : "Yes, proceed"}
+        variant={confirmAction?.type === "delete" ? "destructive" : "default"}
+      />
+
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-heading font-bold text-foreground">Blog Posts</h2>
         <Button onClick={resetForm}>
@@ -135,12 +160,7 @@ const AdminBlog = () => {
           </div>
           <div className="space-y-2">
             <Label>Content</Label>
-            <Textarea
-              rows={12}
-              value={form.content}
-              onChange={(e) => setForm({ ...form, content: e.target.value })}
-              placeholder="Write your blog post content here..."
-            />
+            <Textarea rows={12} value={form.content} onChange={(e) => setForm({ ...form, content: e.target.value })} placeholder="Write your blog post content here..." />
           </div>
           <div className="space-y-2 max-w-xs">
             <Label>Status</Label>
@@ -153,7 +173,7 @@ const AdminBlog = () => {
               </SelectContent>
             </Select>
           </div>
-          <Button onClick={handleSave}>
+          <Button onClick={() => setConfirmAction({ type: "save" })}>
             <Save className="h-4 w-4 mr-2" /> {editingId ? "Update" : "Create"}
           </Button>
         </CardContent>
@@ -175,7 +195,7 @@ const AdminBlog = () => {
                   </div>
                   <p className="text-xs text-muted-foreground">/{p.slug} · {new Date(p.created_at).toLocaleDateString()}</p>
                 </div>
-                <Button variant="ghost" size="icon" onClick={(e) => { e.stopPropagation(); handleDelete(p.id); }}>
+                <Button variant="ghost" size="icon" onClick={(e) => { e.stopPropagation(); setConfirmAction({ type: "delete", id: p.id }); }}>
                   <Trash2 className="h-4 w-4 text-destructive" />
                 </Button>
               </CardContent>
