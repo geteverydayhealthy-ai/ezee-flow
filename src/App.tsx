@@ -37,6 +37,18 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import LoadingScreen from "./components/LoadingScreen";
 
+// Admin CMS
+import { AuthProvider } from "./hooks/useAuth";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminPages from "./pages/admin/AdminPages";
+import AdminForms from "./pages/admin/AdminForms";
+import AdminSubmissions from "./pages/admin/AdminSubmissions";
+import AdminBlog from "./pages/admin/AdminBlog";
+import AdminUsers from "./pages/admin/AdminUsers";
+
 const queryClient = new QueryClient();
 
 // Scroll to top on route change
