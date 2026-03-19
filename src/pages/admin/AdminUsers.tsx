@@ -15,7 +15,7 @@ type UserRole = Tables<"user_roles">;
 type AppRole = Database["public"]["Enums"]["app_role"];
 type Profile = Tables<"profiles">;
 
-type UserWithRole = UserRole & { profiles?: Profile | null };
+type UserWithRole = UserRole & { display_name?: string | null };
 
 const AdminUsers = () => {
   const { isAdmin } = useAuth();
@@ -25,11 +25,20 @@ const AdminUsers = () => {
   const [newRole, setNewRole] = useState<AppRole>("editor");
 
   const fetchUsers = async () => {
-    const { data } = await supabase
+    const { data: roles } = await supabase
       .from("user_roles")
-      .select("*, profiles(display_name, avatar_url)")
+      .select("*")
       .order("created_at", { ascending: false });
-    setUsers((data as UserWithRole[]) ?? []);
+    if (!roles) { setLoading(false); return; }
+    
+    const userIds = roles.map(r => r.user_id);
+    const { data: profiles } = await supabase
+      .from("profiles")
+      .select("user_id, display_name")
+      .in("user_id", userIds);
+    
+    const profileMap = new Map(profiles?.map(p => [p.user_id, p.display_name]) ?? []);
+    setUsers(roles.map(r => ({ ...r, display_name: profileMap.get(r.user_id) ?? null })));
     setLoading(false);
   };
 
