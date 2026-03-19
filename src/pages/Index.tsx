@@ -66,7 +66,7 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[70vh] sm:min-h-[85vh] flex items-center overflow-hidden">
         <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="xMidYMid slice">
           <path d="M-50 200 Q 200 350, 400 300 T 720 400 T 1050 350 T 1500 500" stroke="hsl(var(--border))" strokeWidth="1.5" fill="none" />
           <path d="M-50 500 Q 300 250, 500 400 T 900 300 T 1200 450 T 1550 300" stroke="hsl(var(--border))" strokeWidth="1.5" fill="none" />
