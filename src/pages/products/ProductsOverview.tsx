@@ -7,28 +7,28 @@ import CTASection from "@/components/CTASection";
 import { usePageContent } from "@/hooks/usePageContent";
 
 const products = [
-  { title: "The Digital Operating Layer", desc: "Modernize insurance without replacing core systems", href: "/products/digital-operating-layer", icon: Layers },
-  { title: "Digital Spine", desc: "Connect acquisition, workflows, governance, and intelligence", href: "/products/digital-spine", icon: Workflow },
-  { title: "Insurance CRM + ERP", desc: "Structure sales, servicing, and internal operations", href: "/products/insurance-crm-erp", icon: Users },
-  { title: "Lead & Opportunity Engine", desc: "Bring discipline to demand and conversion", href: "/products/lead-opportunity-engine", icon: Target },
-  { title: "Claims Movement System", desc: "Improve claim visibility, tracking, and communication", href: "/products/claims-movement-system", icon: Eye },
-  { title: "Agency Dashboard", desc: "Manage channel visibility and partner performance", href: "/products/agency-dashboard", icon: BarChart3 },
-  { title: "AI-enabled BI & Analytics", desc: "Turn business movement into usable insight", href: "/products/ai-business-intelligence-analytics", icon: Bot },
+  { title: "The Digital Operating Layer", desc: "A modern technology layer above legacy systems that connects distribution, workflows, governance, and intelligence into one structured digital environment", href: "/products/digital-operating-layer", icon: Layers },
+  { title: "Digital Spine", desc: "Four connected architecture layers: acquisition, workflows, governance, and intelligence in one insurance backbone", href: "/products/digital-spine", icon: Workflow },
+  { title: "Insurance CRM + ERP", desc: "Policy-aware sales, servicing, task management, and operational accountability built for insurance teams", href: "/products/insurance-crm-erp", icon: Users },
+  { title: "Lead & Opportunity Engine", desc: "Structured demand capture, routing, and conversion tracking across all distribution channels", href: "/products/lead-opportunity-engine", icon: Target },
+  { title: "Claims Movement System", desc: "End-to-end claims intake, coordination, tracking, and resolution with structured workflows", href: "/products/claims-movement-system", icon: Eye },
+  { title: "Agency Dashboard", desc: "Distribution visibility, partner performance tracking, and channel management in one view", href: "/products/agency-dashboard", icon: BarChart3 },
+  { title: "AI-enabled BI & Analytics", desc: "Real-time intelligence, trend detection, and AI-assisted decision support for insurance leadership", href: "/products/ai-business-intelligence-analytics", icon: Bot },
 ];
 
 const ProductsOverview = () => {
   const { get } = usePageContent("products-overview");
 
   const heroHeading = get("hero", "heading", "Products built for modern insurance execution");
-  const heroSub = get("hero", "subheading", "Ezee Technologies builds modular products that help insurers modernize customer journeys, operations, distribution, visibility, and decision-making without forcing rigid systems or hardcoded logic.");
+  const heroSub = get("hero", "subheading", "Ezee Technologies builds modular products that help insurers modernize customer journeys, operations, distribution, visibility, and decision-making. Configurable, not hardcoded. Modular, not monolithic.");
   const ctaHeading = get("cta", "heading", "Let's build the right digital layer for your insurance business");
   const ctaLabel = get("cta", "ctaLabel", "Book a Demo");
 
   return (
     <Layout>
-      <PageHero heading={heroHeading} subheading={heroSub} primaryCta={{ label: "Book a Demo", href: "/contact" }} />
+      <PageHero heading={heroHeading} subheading={heroSub} primaryCta={{ label: "Book a Demo", href: "/contact" }} secondaryCta={{ label: "Explore Digital Spine", href: "/products/digital-spine" }} />
       <div className="section-container -mt-8 mb-16">
-        <p className="text-center text-sm text-muted-foreground">Built to work independently or together as part of the Digital Operating Layer.</p>
+        <p className="text-center text-sm text-muted-foreground">Each product works independently or together as part of the Digital Operating Layer.</p>
       </div>
 
       <section className="section-spacing">
@@ -47,6 +47,19 @@ const ProductsOverview = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* How products connect */}
+      <section className="section-spacing bg-accent/50">
+        <div className="section-container max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6">How products work together</h2>
+          <p className="text-muted-foreground leading-relaxed mb-8">
+            Each product solves a specific insurance problem. The Lead Engine captures demand. The CRM manages the relationship. The Claims System handles resolution. The Agency Dashboard provides channel visibility. BI & Analytics turns it all into intelligence. Together, they form the Digital Operating Layer.
+          </p>
+          <Link to="/products/digital-operating-layer" className="inline-flex items-center gap-2 text-primary font-semibold text-sm hover:gap-3 transition-all">
+            Learn about the Digital Operating Layer <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 

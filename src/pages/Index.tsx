@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, Shield, Layers, Workflow, BarChart3, Zap, Settings, Eye, Target, Users, Bot, Briefcase } from "lucide-react";
+import { ArrowRight, Shield, Layers, Workflow, BarChart3, Zap, Settings, Eye, Target, Users, Bot, Briefcase, Building2, Globe, TrendingUp } from "lucide-react";
 import Layout from "@/components/Layout";
 import CTASection from "@/components/CTASection";
 import { usePageContent } from "@/hooks/usePageContent";
+import imgHappyTeam from "@/assets/visuals/v5-happy-team.jpg";
 
 const floatingCards = [
   { label: "Modular\ntech stack", color: "bg-card-teal text-primary-foreground", x: "left-[5%]", y: "top-[8%]", delay: 0, tags: ["Funnels", "Claims", "Data", "Portals", "Policy admin"] },
@@ -16,21 +17,28 @@ const floatingCards = [
 ];
 
 const productCards = [
-  { title: "The Digital Operating Layer", desc: "Modernize insurance without replacing core systems", href: "/products/digital-operating-layer", icon: Layers },
-  { title: "Digital Spine", desc: "Connect acquisition, workflows, governance, and intelligence", href: "/products/digital-spine", icon: Workflow },
-  { title: "Insurance CRM + ERP", desc: "Structure sales, servicing, and internal operations", href: "/products/insurance-crm-erp", icon: Users },
-  { title: "Lead & Opportunity Engine", desc: "Bring discipline to demand and conversion", href: "/products/lead-opportunity-engine", icon: Target },
-  { title: "Claims Movement System", desc: "Structured claims intake, coordination, and resolution", href: "/products/claims-movement-system", icon: Eye },
-  { title: "Agency Dashboard", desc: "Manage channel visibility and partner performance", href: "/products/agency-dashboard", icon: BarChart3 },
-  { title: "AI-enabled BI & Analytics", desc: "Turn operational data into actionable intelligence", href: "/products/ai-business-intelligence-analytics", icon: Bot },
+  { title: "The Digital Operating Layer", desc: "A modern technology layer above legacy systems that connects distribution, workflows, governance, and intelligence", href: "/products/digital-operating-layer", icon: Layers },
+  { title: "Digital Spine", desc: "Four connected layers: acquisition, workflows, governance, and intelligence in one backbone", href: "/products/digital-spine", icon: Workflow },
+  { title: "Insurance CRM + ERP", desc: "Policy-aware sales, servicing, and operational management built for insurance teams", href: "/products/insurance-crm-erp", icon: Users },
+  { title: "Lead & Opportunity Engine", desc: "Structured demand capture, routing, and conversion tracking across all channels", href: "/products/lead-opportunity-engine", icon: Target },
+  { title: "Claims Movement System", desc: "End-to-end claims intake, coordination, tracking, and resolution workflows", href: "/products/claims-movement-system", icon: Eye },
+  { title: "Agency Dashboard", desc: "Distribution visibility, partner performance, and channel management in one view", href: "/products/agency-dashboard", icon: BarChart3 },
+  { title: "AI-enabled BI & Analytics", desc: "Real-time intelligence, trend detection, and decision support for insurance leadership", href: "/products/ai-business-intelligence-analytics", icon: Bot },
 ];
 
 const solutionCards = [
-  { title: "Creative Office", desc: "Make insurance communication clear, credible, and conversion-ready", href: "/solutions/creative-office", icon: Briefcase },
-  { title: "Performance Marketing", desc: "Build measurable insurance acquisition systems", href: "/solutions/performance-marketing", icon: Target },
-  { title: "App & Tech Development", desc: "Build insurance-native customer and operational platforms", href: "/solutions/app-tech-development", icon: Settings },
-  { title: "Agentic AI", desc: "Apply AI to insurance workflows and decision support", href: "/solutions/agentic-ai", icon: Bot },
-  { title: "Backoffice", desc: "Bring discipline and visibility to internal insurance operations", href: "/solutions/backoffice", icon: Workflow },
+  { title: "Creative Office", desc: "Insurance communication systems that build trust, improve comprehension, and drive conversion", href: "/solutions/creative-office", icon: Briefcase },
+  { title: "Performance Marketing", desc: "Measurable acquisition systems with full-funnel tracking tied to actual policy outcomes", href: "/solutions/performance-marketing", icon: Target },
+  { title: "App & Tech Development", desc: "Insurance-native portals, apps, and platforms designed around real operational needs", href: "/solutions/app-tech-development", icon: Settings },
+  { title: "Agentic AI", desc: "Intelligent automation for servicing, underwriting support, claims, and decision-making", href: "/solutions/agentic-ai", icon: Bot },
+  { title: "Backoffice", desc: "Structured workflows, accountability, and visibility for internal insurance operations", href: "/solutions/backoffice", icon: Workflow },
+];
+
+const whoWeServe = [
+  { icon: Building2, title: "Large & Composite Carriers", desc: "Modernize selected functions or build a connected digital operating model across the enterprise" },
+  { icon: TrendingUp, title: "Mid-Sized Insurers", desc: "Deploy modular products to digitize distribution, claims, servicing, and internal operations" },
+  { icon: Zap, title: "Startup MGAs & Digital Insurers", desc: "Launch faster with configurable infrastructure purpose-built for insurance from day one" },
+  { icon: Globe, title: "Embedded & Ecosystem Players", desc: "Design and deploy insurance distribution through partners, fintechs, and digital platforms" },
 ];
 
 const principles = [
@@ -146,22 +154,24 @@ const Index = () => {
       {/* What insurers can unlock */}
       <section className="section-spacing">
         <div className="section-container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="section-heading text-center mb-16 max-w-3xl mx-auto">What insurers can unlock without ripping everything out</h2>
-          </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center mb-16">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+              <p className="eyebrow mb-4">Capability overview</p>
+              <h2 className="text-3xl sm:text-4xl font-bold leading-tight tracking-tight mb-6">What insurers can unlock without ripping everything out</h2>
+              <p className="text-muted-foreground leading-relaxed">The Digital Operating Layer lets insurers modernize specific capabilities or build a connected digital architecture. Start with one product. Expand when it makes sense. No forced bundling, no rigid deployment sequences.</p>
+            </motion.div>
+            <motion.div className="rounded-2xl aspect-[4/3] overflow-hidden" initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <img src={imgHappyTeam} alt="Insurance team collaboration" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
+            </motion.div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: Layers, text: "Digital distribution across web, app, embedded, and partner channels" },
-              { icon: Users, text: "Interactive onboarding and self-service portals" },
+              { icon: Users, text: "Interactive onboarding and self-service portals for policyholders" },
               { icon: Workflow, text: "Workflow automation across underwriting, servicing, and claims" },
               { icon: Settings, text: "API-based partner and ecosystem integration" },
-              { icon: Zap, text: "Configurable product setup and faster launches" },
-              { icon: BarChart3, text: "Real-time visibility, reporting, and AI-enabled intelligence" },
+              { icon: Zap, text: "Configurable product setup and faster launches across insurance lines" },
+              { icon: BarChart3, text: "Real-time visibility, reporting, and AI-powered intelligence" },
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -193,38 +203,81 @@ const Index = () => {
             <p className="text-lg text-secondary-foreground/70 max-w-2xl mx-auto">Four layers. One connected insurance operating model.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { layer: "01", title: "Acquisition", desc: "Turn demand into digital insurance journeys", color: "bg-card-teal" },
-              { layer: "02", title: "Workflows", desc: "Make insurance operations move with discipline", color: "bg-card-mint" },
-              { layer: "03", title: "Governance", desc: "Move faster without losing control", color: "bg-card-sage" },
-              { layer: "04", title: "Intelligence", desc: "Turn data into sharper insurance decisions", color: "bg-card-aqua" },
+              { layer: "01", title: "Acquisition", desc: "Turn demand into digital insurance journeys across all distribution channels", color: "bg-card-teal", items: ["Digital funnels", "Partner distribution", "Self-service purchase flows"] },
+              { layer: "02", title: "Workflows", desc: "Structure internal movement across underwriting, servicing, and claims", color: "bg-card-mint", items: ["Underwriting workflows", "Claims processes", "Task routing and handoffs"] },
+              { layer: "03", title: "Governance", desc: "Move faster without losing control over compliance and approvals", color: "bg-card-sage", items: ["Approval logic", "Access controls", "Audit visibility"] },
+              { layer: "04", title: "Intelligence", desc: "Turn operational data into sharper decisions and strategic clarity", color: "bg-card-aqua", items: ["Performance dashboards", "Trend detection", "AI-assisted insights"] },
             ].map((item, i) => (
               <motion.div
                 key={i}
-                className={`${item.color} rounded-2xl p-6 text-foreground`}
+                className={`${item.color} rounded-2xl p-6 text-foreground flex flex-col`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
               >
-                <span className="text-xs font-bold opacity-50">LAYER {item.layer}</span>
-                <h3 className="text-xl font-bold mt-2 mb-3">{item.title}</h3>
-                <p className="text-sm opacity-80">{item.desc}</p>
+                <span className="text-xs font-bold opacity-50 uppercase tracking-wider">Layer {item.layer}</span>
+                <h3 className="text-xl font-bold mt-2 mb-2">{item.title}</h3>
+                <p className="text-sm opacity-75 mb-4">{item.desc}</p>
+                <ul className="mt-auto space-y-1.5">
+                  {item.items.map((point, j) => (
+                    <li key={j} className="flex items-center gap-2 text-xs opacity-70">
+                      <span className="w-1 h-1 rounded-full bg-foreground/50 flex-shrink-0" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Link to="/products/digital-spine" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity">
-              Explore Digital Spine <ArrowRight className="w-4 h-4" />
-            </Link>
+          <div className="mt-10">
+            <div className="hidden lg:flex items-center justify-center gap-0 mb-6">
+              {[0, 1, 2, 3].map((i) => (
+                <div key={i} className="flex items-center">
+                  <div className="w-3 h-3 rounded-full bg-primary" />
+                  {i < 3 && <div className="w-24 h-px bg-primary/40" />}
+                </div>
+              ))}
+            </div>
+            <p className="text-center text-sm text-secondary-foreground/60 max-w-xl mx-auto mb-8">
+              Each layer works independently. Together, they form a true insurance operating backbone.
+            </p>
+            <div className="text-center">
+              <Link to="/products/digital-spine" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-full text-sm font-semibold hover:opacity-90 transition-opacity">
+                Explore Digital Spine <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Who we serve */}
+      <section className="section-spacing">
+        <div className="section-container">
+          <motion.div className="text-center mb-16" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <p className="eyebrow mb-4">Who we serve</p>
+            <h2 className="section-heading max-w-3xl mx-auto mb-4">Built for insurers at every stage of digital maturity</h2>
+            <p className="section-subheading mx-auto">From startup MGAs launching their first digital product to large carriers modernizing complex operations. One technology partner, configured for your reality.</p>
+          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {whoWeServe.map((item, i) => (
+              <motion.div key={i} className="bg-card rounded-2xl p-7 border border-border text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
+                <div className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center mx-auto mb-5">
+                  <item.icon className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-bold mb-2">{item.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Solutions preview */}
-      <section className="section-spacing">
+      <section className="section-spacing bg-accent/50">
         <div className="section-container">
           <motion.div
             className="text-center mb-16"
@@ -234,7 +287,7 @@ const Index = () => {
           >
             <p className="eyebrow mb-4">Execution Pods</p>
             <h2 className="section-heading max-w-3xl mx-auto mb-4">Specialized teams for insurance growth and transformation</h2>
-            <p className="section-subheading mx-auto">Focused capabilities that solve specific parts of insurance modernization, from customer-facing communication to technology, AI, and backoffice execution.</p>
+            <p className="section-subheading mx-auto">Focused capabilities that solve specific parts of insurance modernization: from customer-facing communication to technology, AI, and backoffice execution.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -261,7 +314,7 @@ const Index = () => {
       </section>
 
       {/* Products preview */}
-      <section className="section-spacing bg-accent/50">
+      <section className="section-spacing">
         <div className="section-container">
           <motion.div
             className="text-center mb-16"
@@ -271,7 +324,7 @@ const Index = () => {
           >
             <p className="eyebrow mb-4">Platform Products</p>
             <h2 className="section-heading max-w-3xl mx-auto mb-4">Modular products built for real insurance execution</h2>
-            <p className="section-subheading mx-auto">Each product solves a specific insurance problem. Together they form a connected, intelligent, and scalable operating environment.</p>
+            <p className="section-subheading mx-auto">Each product solves a specific insurance problem. Deploy one or connect several into a unified operating environment.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -298,7 +351,7 @@ const Index = () => {
       </section>
 
       {/* Principles */}
-      <section className="section-spacing">
+      <section className="section-spacing bg-accent/50">
         <div className="section-container">
           <motion.div
             className="text-center mb-16"
@@ -307,12 +360,13 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <h2 className="section-heading">Built around insurer reality</h2>
+            <p className="section-subheading mx-auto mt-4">Not generic enterprise software adapted for insurance. Purpose-built infrastructure shaped around how insurers actually operate.</p>
           </motion.div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
             {principles.map((p, i) => (
               <motion.div
                 key={i}
-                className="text-center"
+                className="text-center bg-card rounded-2xl p-6 border border-border"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -337,15 +391,16 @@ const Index = () => {
       </section>
 
       {/* FAQ */}
-      <section className="section-spacing bg-accent/50">
+      <section className="section-spacing">
         <div className="section-container max-w-3xl">
           <h2 className="section-heading text-center mb-12">Frequently asked questions</h2>
           <div className="space-y-6">
             {[
-              { q: "What does Ezee Technologies do?", a: "We help insurers modernize distribution, customer journeys, workflows, governance, and intelligence through configurable, insurance-native infrastructure. We work with insurers of all sizes, from MGAs to large carriers." },
+              { q: "What does Ezee Technologies do?", a: "We help insurers modernize distribution, customer journeys, workflows, governance, and intelligence through configurable, insurance-native infrastructure. We work with insurers of all sizes, from startup MGAs to large composite carriers." },
               { q: "What is the Digital Operating Layer for Insurance?", a: "It is a modern technology layer that sits above your existing core systems. It lets you launch digital journeys, automate workflows, integrate partners, and build intelligence without needing to replace what you already have." },
-              { q: "Who is Ezee Technologies built for?", a: "Insurers, MGAs, digital distribution businesses, embedded insurance ecosystems, brokers, and any insurance organization that needs modern, configurable technology infrastructure." },
+              { q: "Who is Ezee Technologies built for?", a: "Insurers, MGAs, digital distribution businesses, embedded insurance ecosystems, and any insurance organization that needs modern, configurable technology infrastructure to support growth and operational improvement." },
               { q: "Can we start with just one product?", a: "Yes. Every product is designed to work independently. You can start with a single product and expand over time as your needs grow. No forced bundling." },
+              { q: "How is this different from buying a new core system?", a: "Core system replacements are expensive, slow, and high-risk. The Digital Operating Layer modernizes customer journeys, workflows, integrations, and intelligence while preserving your existing core investments." },
             ].map((faq, i) => (
               <div key={i} className="bg-card rounded-xl p-6 border border-border">
                 <h3 className="font-semibold mb-2">{faq.q}</h3>
