@@ -1,7 +1,7 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import imgSolves from "@/assets/visuals/v3-backoffice-flow.jpg";
-import imgIncludes from "@/assets/visuals/v3-backoffice-discipline.jpg";
-import imgMatters from "@/assets/visuals/v2-governance-shield.jpg";
+import imgSolves from "@/assets/visuals/v5-backoffice-flow.jpg";
+import imgIncludes from "@/assets/visuals/v5-backoffice-discipline.jpg";
+import imgMatters from "@/assets/visuals/v5-backoffice-governance.jpg";
 
 const Backoffice = () => (
   <SolutionPageTemplate

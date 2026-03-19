@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
-import imgMission from "@/assets/visuals/v4-happy-team.jpg";
-import imgVision from "@/assets/visuals/v4-digital-infrastructure.jpg";
+import imgMission from "@/assets/visuals/v5-happy-team.jpg";
+import imgVision from "@/assets/visuals/v5-about-infrastructure.jpg";
 
 const principles = [
   { icon: Zap, title: "Fastest go-to-market", desc: "We help insurers launch digital products, channels, and journeys faster through modular, configurable infrastructure that removes the traditional bottlenecks." },

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
-import imgVisual from "@/assets/visuals/v4-blueprint.jpg";
+import imgVisual from "@/assets/visuals/v5-blueprint-plan.jpg";
 
 const BlueprintStrategy = () => (
   <Layout>

@@ -1,7 +1,7 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import imgSolves from "@/assets/visuals/v3-ai-servicing.jpg";
-import imgIncludes from "@/assets/visuals/v3-ai-copilot.jpg";
-import imgMatters from "@/assets/visuals/v3-ai-leadership.jpg";
+import imgSolves from "@/assets/visuals/v5-agentic-servicing.jpg";
+import imgIncludes from "@/assets/visuals/v5-agentic-copilot.jpg";
+import imgMatters from "@/assets/visuals/v5-agentic-leadership.jpg";
 
 const AgenticAI = () => (
   <SolutionPageTemplate
