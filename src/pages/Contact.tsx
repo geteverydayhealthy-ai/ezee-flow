@@ -2,6 +2,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
 import Layout from "@/components/Layout";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+
+const CONTACT_FORM_SLUG = "contact-form";
 
 const helpOptions = [
   "Digital Operating Layer discussion",
@@ -18,10 +22,51 @@ const helpOptions = [
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    help_with: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    try {
+      // First try to find the contact form in DB
+      const { data: form } = await supabase
+        .from("forms")
+        .select("id")
+        .eq("slug", CONTACT_FORM_SLUG)
+        .eq("is_active", true)
+        .maybeSingle();
+
+      if (form) {
+        // Save submission to database
+        const { error } = await supabase.from("form_submissions").insert({
+          form_id: form.id,
+          data: formData as any,
+          source_url: window.location.href,
+        });
+        if (error) throw error;
+      }
+
+      setSubmitted(true);
+      toast.success("Message sent successfully!");
+    } catch (err: any) {
+      console.error("Submission error:", err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -85,26 +130,26 @@ const Contact = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium mb-1.5">Name</label>
-                      <input type="text" required className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+                      <input type="text" name="name" required value={formData.name} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1.5">Company</label>
-                      <input type="text" required className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+                      <input type="text" name="company" required value={formData.company} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium mb-1.5">Work Email</label>
-                      <input type="email" required className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+                      <input type="email" name="email" required value={formData.email} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1.5">Phone Number</label>
-                      <input type="tel" className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+                      <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1.5">What do you need help with?</label>
-                    <select required className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring">
+                    <select name="help_with" required value={formData.help_with} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring">
                       <option value="">Select an option</option>
                       {helpOptions.map((opt) => (
                         <option key={opt} value={opt}>{opt}</option>
@@ -113,10 +158,10 @@ const Contact = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1.5">Message</label>
-                    <textarea rows={4} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
+                    <textarea name="message" rows={4} value={formData.message} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
                   </div>
-                  <button type="submit" className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">
-                    Send message
+                  <button type="submit" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50">
+                    {isSubmitting ? "Sending..." : "Send message"}
                   </button>
                 </form>
               )}
