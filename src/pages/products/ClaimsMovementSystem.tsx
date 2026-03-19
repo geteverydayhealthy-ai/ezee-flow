@@ -1,8 +1,8 @@
 import { Eye } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
-import imgSolves from "@/assets/visuals/v6-claims-journey.jpg";
-import imgIncludes from "@/assets/visuals/v5-claims-coordination.jpg";
-import imgMatters from "@/assets/visuals/v5-claims-resolution.jpg";
+import imgSolves from "@/assets/visuals/v7-claims-journey.jpg";
+import imgIncludes from "@/assets/visuals/v7-claims-coordination.jpg";
+import imgMatters from "@/assets/visuals/v7-claims-resolution.jpg";
 
 const ClaimsMovementSystem = () => (
   <ProductPageTemplate
