@@ -1,15 +1,15 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 import logo from "@/assets/logo.png";
 
-/* ── tiny seeded-random for deterministic particle positions ── */
+/* ── seeded-random for deterministic particles ── */
 const seed = (s: number) => () => {
   s = (s * 16807) % 2147483647;
   return (s - 1) / 2147483646;
 };
 
-/* ── Particle field ── */
-const Particles = ({ count = 50 }: { count?: number }) => {
+/* ── Particle field (reduced on mobile) ── */
+const Particles = ({ count = 40 }: { count?: number }) => {
   const particles = useMemo(() => {
     const rng = seed(42);
     return Array.from({ length: count }, (_, i) => ({
@@ -19,16 +19,16 @@ const Particles = ({ count = 50 }: { count?: number }) => {
       size: rng() * 3 + 1,
       dur: rng() * 6 + 4,
       delay: rng() * 3,
-      drift: (rng() - 0.5) * 30,
+      drift: (rng() - 0.5) * 20,
     }));
   }, [count]);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full"
+          className="absolute rounded-full will-change-transform"
           style={{
             left: `${p.x}%`,
             top: `${p.y}%`,
@@ -55,30 +55,35 @@ const Particles = ({ count = 50 }: { count?: number }) => {
   );
 };
 
-/* ── Orbital rings ── */
-const OrbitalRing = ({ radius, duration, delay, reverse }: { radius: number; duration: number; delay: number; reverse?: boolean }) => (
+/* ── Orbital rings — responsive via vmin percentages ── */
+const OrbitalRing = ({
+  sizeVmin,
+  duration,
+  delay,
+  reverse,
+}: {
+  sizeVmin: number;
+  duration: number;
+  delay: number;
+  reverse?: boolean;
+}) => (
   <motion.div
-    className="absolute rounded-full border"
+    className="absolute rounded-full border pointer-events-none will-change-transform"
     style={{
-      width: radius * 2,
-      height: radius * 2,
-      left: `calc(50% - ${radius}px)`,
-      top: `calc(50% - ${radius}px)`,
+      width: `${sizeVmin}vmin`,
+      height: `${sizeVmin}vmin`,
+      left: `calc(50% - ${sizeVmin / 2}vmin)`,
+      top: `calc(50% - ${sizeVmin / 2}vmin)`,
       borderColor: "hsl(174 42% 40% / 0.08)",
     }}
     initial={{ scale: 0, opacity: 0, rotate: 0 }}
-    animate={{
-      scale: 1,
-      opacity: 1,
-      rotate: reverse ? -360 : 360,
-    }}
+    animate={{ scale: 1, opacity: 1, rotate: reverse ? -360 : 360 }}
     transition={{
       scale: { duration: 1.2, delay, ease: "easeOut" },
       opacity: { duration: 0.8, delay },
       rotate: { duration, repeat: Infinity, ease: "linear" },
     }}
   >
-    {/* orbiting dot */}
     <motion.div
       className="absolute -top-1 left-1/2 -ml-1 w-2 h-2 rounded-full"
       style={{ background: "hsl(174 42% 50% / 0.5)" }}
@@ -86,24 +91,20 @@ const OrbitalRing = ({ radius, duration, delay, reverse }: { radius: number; dur
   </motion.div>
 );
 
-/* ── Glowing pulse behind logo ── */
+/* ── Glowing pulse — responsive ── */
 const GlowPulse = () => (
   <>
     <motion.div
-      className="absolute rounded-full"
+      className="absolute rounded-full w-[40vmin] h-[40vmin] max-w-[200px] max-h-[200px]"
       style={{
-        width: 200,
-        height: 200,
         background: "radial-gradient(circle, hsl(174 42% 40% / 0.15), transparent 70%)",
       }}
       animate={{ scale: [1, 1.6, 1], opacity: [0.4, 0.15, 0.4] }}
       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
     />
     <motion.div
-      className="absolute rounded-full"
+      className="absolute rounded-full w-[60vmin] h-[60vmin] max-w-[300px] max-h-[300px]"
       style={{
-        width: 300,
-        height: 300,
         background: "radial-gradient(circle, hsl(174 42% 40% / 0.08), transparent 70%)",
       }}
       animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.1, 0.3] }}
@@ -115,13 +116,13 @@ const GlowPulse = () => (
 /* ── Grid overlay ── */
 const GridOverlay = () => (
   <div
-    className="absolute inset-0 opacity-[0.03]"
+    className="absolute inset-0 opacity-[0.03] pointer-events-none"
     style={{
       backgroundImage: `
         linear-gradient(hsl(174 42% 40%) 1px, transparent 1px),
         linear-gradient(90deg, hsl(174 42% 40%) 1px, transparent 1px)
       `,
-      backgroundSize: "60px 60px",
+      backgroundSize: "clamp(30px, 8vw, 60px) clamp(30px, 8vw, 60px)",
     }}
   />
 );
@@ -129,7 +130,7 @@ const GridOverlay = () => (
 /* ── Scanning line ── */
 const ScanLine = () => (
   <motion.div
-    className="absolute left-0 right-0 h-px"
+    className="absolute left-0 right-0 h-px pointer-events-none"
     style={{
       background: "linear-gradient(90deg, transparent, hsl(174 42% 50% / 0.3), transparent)",
     }}
@@ -142,19 +143,15 @@ const ScanLine = () => (
 /* ── Main loading screen ── */
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState<"loading" | "complete">("loading");
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setPhase("complete");
           setTimeout(onComplete, 600);
           return 100;
         }
-        // Organic progress: fast start, slow middle, fast end
-        const remaining = 100 - prev;
         const speed = prev < 30 ? 12 : prev < 70 ? 4 : prev < 90 ? 8 : 15;
         return Math.min(prev + Math.random() * speed + 2, 100);
       });
@@ -165,25 +162,34 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   return (
     <motion.div
       className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden"
-      style={{ background: "hsl(195 30% 10%)" }}
+      style={{
+        background: "hsl(195 30% 10%)",
+        /* safe-area support for notched devices */
+        paddingTop: "env(safe-area-inset-top, 0px)",
+        paddingBottom: "env(safe-area-inset-bottom, 0px)",
+        paddingLeft: "env(safe-area-inset-left, 0px)",
+        paddingRight: "env(safe-area-inset-right, 0px)",
+        /* use dvh where supported for mobile browser chrome */
+        height: "100dvh",
+      }}
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
     >
       {/* Layers */}
       <GridOverlay />
       <ScanLine />
-      <Particles count={60} />
+      <Particles count={40} />
 
-      {/* Orbital rings */}
-      <OrbitalRing radius={140} duration={20} delay={0.3} />
-      <OrbitalRing radius={200} duration={30} delay={0.6} reverse />
-      <OrbitalRing radius={260} duration={25} delay={0.9} />
+      {/* Orbital rings — vmin based so they scale to smallest viewport dimension */}
+      <OrbitalRing sizeVmin={45} duration={20} delay={0.3} />
+      <OrbitalRing sizeVmin={65} duration={30} delay={0.6} reverse />
+      <OrbitalRing sizeVmin={82} duration={25} delay={0.9} />
 
       {/* Center content */}
-      <div className="relative z-10 flex flex-col items-center">
+      <div className="relative z-10 flex flex-col items-center px-6">
         <GlowPulse />
 
-        {/* Logo with dramatic entrance */}
+        {/* Logo */}
         <motion.div
           className="relative"
           initial={{ opacity: 0, scale: 0.5, y: 30 }}
@@ -193,7 +199,10 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           <motion.img
             src={logo}
             alt="Ezee Technologies"
-            className="h-16 sm:h-20 w-auto brightness-0 invert drop-shadow-[0_0_30px_hsl(174_42%_40%/0.3)]"
+            className="h-12 xs:h-14 sm:h-16 md:h-20 w-auto brightness-0 invert"
+            style={{
+              filter: "brightness(0) invert(1) drop-shadow(0 0 20px hsl(174 42% 40% / 0.3))",
+            }}
             animate={{
               filter: [
                 "brightness(0) invert(1) drop-shadow(0 0 20px hsl(174 42% 40% / 0.2))",
@@ -207,13 +216,14 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
 
         {/* Progress section */}
         <motion.div
-          className="mt-10 flex flex-col items-center"
+          className="mt-8 sm:mt-10 flex flex-col items-center w-full max-w-xs"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          {/* Progress bar with glow */}
-          <div className="relative w-52 sm:w-72 h-[3px] rounded-full overflow-hidden"
+          {/* Progress bar */}
+          <div
+            className="relative w-full h-[3px] rounded-full overflow-hidden"
             style={{ background: "hsl(174 42% 40% / 0.1)" }}
           >
             <motion.div
@@ -224,11 +234,11 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
                 boxShadow: "0 0 15px hsl(174 42% 50% / 0.6), 0 0 30px hsl(174 42% 50% / 0.3)",
               }}
             />
-            {/* Glowing leading edge */}
+            {/* Leading edge dot */}
             <motion.div
-              className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full"
+              className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full"
               style={{
-                left: `calc(${Math.min(progress, 100)}% - 6px)`,
+                left: `calc(${Math.min(progress, 100)}% - 5px)`,
                 background: "hsl(174 42% 70%)",
                 boxShadow: "0 0 10px hsl(174 42% 50%)",
                 opacity: progress < 100 ? 1 : 0,
@@ -238,15 +248,15 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
 
           {/* Percentage */}
           <motion.span
-            className="mt-4 text-xs font-mono tracking-[0.3em] uppercase"
+            className="mt-3 sm:mt-4 text-[10px] sm:text-xs font-mono tracking-[0.3em] uppercase"
             style={{ color: "hsl(174 42% 55% / 0.7)" }}
           >
             {Math.round(Math.min(progress, 100))}%
           </motion.span>
 
-          {/* Tagline with staggered reveal */}
+          {/* Tagline */}
           <motion.p
-            className="mt-6 text-xs sm:text-sm tracking-[0.25em] uppercase font-medium"
+            className="mt-4 sm:mt-6 text-[10px] sm:text-xs md:text-sm tracking-[0.15em] sm:tracking-[0.25em] uppercase font-medium text-center"
             style={{ color: "hsl(0 0% 100% / 0.3)" }}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -259,10 +269,10 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
 
       {/* Corner accents */}
       {[
-        "top-6 left-6",
-        "top-6 right-6 rotate-90",
-        "bottom-6 left-6 -rotate-90",
-        "bottom-6 right-6 rotate-180",
+        "top-3 left-3 sm:top-6 sm:left-6",
+        "top-3 right-3 sm:top-6 sm:right-6 rotate-90",
+        "bottom-3 left-3 sm:bottom-6 sm:left-6 -rotate-90",
+        "bottom-3 right-3 sm:bottom-6 sm:right-6 rotate-180",
       ].map((pos, i) => (
         <motion.div
           key={i}
@@ -271,7 +281,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           animate={{ opacity: 0.15 }}
           transition={{ delay: 0.8 + i * 0.1 }}
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="sm:w-6 sm:h-6">
             <path d="M0 12V0h12" stroke="hsl(174 42% 50%)" strokeWidth="1" />
           </svg>
         </motion.div>
