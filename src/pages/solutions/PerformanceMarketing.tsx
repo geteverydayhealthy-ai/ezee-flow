@@ -1,6 +1,6 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
-import imgSolves from "@/assets/visuals/v5-perf-acquisition.jpg";
-import imgIncludes from "@/assets/visuals/v5-perf-funnel.jpg";
+import imgSolves from "@/assets/visuals/v6-perf-acquisition.jpg";
+import imgIncludes from "@/assets/visuals/v6-perf-funnel.jpg";
 import imgMatters from "@/assets/visuals/v5-perf-outcome.jpg";
 
 const PerformanceMarketing = () => (

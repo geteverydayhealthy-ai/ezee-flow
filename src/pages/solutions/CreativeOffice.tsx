@@ -1,6 +1,6 @@
 import SolutionPageTemplate from "@/components/SolutionPageTemplate";
 import imgSolves from "@/assets/visuals/v5-creative-studio.jpg";
-import imgIncludes from "@/assets/visuals/v5-creative-journey.jpg";
+import imgIncludes from "@/assets/visuals/v6-creative-journey.jpg";
 import imgMatters from "@/assets/visuals/v5-creative-impact.jpg";
 
 const CreativeOffice = () => (
