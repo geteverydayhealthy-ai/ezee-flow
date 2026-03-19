@@ -130,26 +130,26 @@ const Contact = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium mb-1.5">Name</label>
-                      <input type="text" required className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+                      <input type="text" name="name" required value={formData.name} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1.5">Company</label>
-                      <input type="text" required className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+                      <input type="text" name="company" required value={formData.company} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-sm font-medium mb-1.5">Work Email</label>
-                      <input type="email" required className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+                      <input type="email" name="email" required value={formData.email} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-1.5">Phone Number</label>
-                      <input type="tel" className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+                      <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1.5">What do you need help with?</label>
-                    <select required className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring">
+                    <select name="help_with" required value={formData.help_with} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring">
                       <option value="">Select an option</option>
                       {helpOptions.map((opt) => (
                         <option key={opt} value={opt}>{opt}</option>
@@ -158,10 +158,10 @@ const Contact = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1.5">Message</label>
-                    <textarea rows={4} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
+                    <textarea name="message" rows={4} value={formData.message} onChange={handleChange} className="w-full px-4 py-3 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
                   </div>
-                  <button type="submit" className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity">
-                    Send message
+                  <button type="submit" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground py-3.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50">
+                    {isSubmitting ? "Sending..." : "Send message"}
                   </button>
                 </form>
               )}
