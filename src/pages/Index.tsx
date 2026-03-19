@@ -362,7 +362,7 @@ const Index = () => {
             <h2 className="section-heading">Built around insurer reality</h2>
             <p className="section-subheading mx-auto mt-4">Not generic enterprise software adapted for insurance. Purpose-built infrastructure shaped around how insurers actually operate.</p>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
             {principles.map((p, i) => (
               <motion.div
                 key={i}
