@@ -2,17 +2,17 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
-import imgVisual from "@/assets/visuals/v2-embedded-ecosystem.jpg";
+import imgVisual from "@/assets/visuals/v4-embedded-ecosystem.jpg";
 
 const EmbeddedInsurance = () => (
   <Layout>
-    <PageHero heading="Embedded Insurance Infrastructure Playbook" subheading="A strategic design engagement that defines how insurance should be distributed through partners, ecosystems, fintechs, digital channels, and white-label environments — with clear architecture, partner roles, and operating models." primaryCta={{ label: "Book a Consultation", href: "/contact" }} />
+    <PageHero heading="Embedded Insurance Infrastructure Playbook" subheading="A strategic design engagement that defines how insurance should be distributed through partners, ecosystems, fintechs, digital channels, and white-label environments. With clear architecture, partner roles, and operating models." primaryCta={{ label: "Book a Consultation", href: "/contact" }} />
 
     <section className="section-spacing bg-accent/50">
       <div className="section-container max-w-3xl mx-auto text-center">
         <h2 className="text-2xl sm:text-3xl font-bold mb-6">What is the Embedded Insurance Playbook?</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Embedded insurance is one of the fastest-growing distribution models in the industry — but executing it well requires more than connecting an API. It requires a clear understanding of partner roles, customer journey design, integration architecture, governance structures, and operating responsibilities. The Embedded Insurance Infrastructure Playbook helps insurers design their embedded distribution strategy from the ground up, ensuring that every partnership, channel, and integration is structured for scalability, compliance, and commercial success.
+          Embedded insurance is one of the fastest-growing distribution models in the industry, but executing it well requires more than connecting an API. It requires a clear understanding of partner roles, customer journey design, integration architecture, governance structures, and operating responsibilities. This Playbook helps insurers design their embedded distribution strategy from the ground up, ensuring that every partnership, channel, and integration is structured for scalability, compliance, and commercial success.
         </p>
       </div>
     </section>
@@ -25,10 +25,10 @@ const EmbeddedInsurance = () => (
             <ul className="space-y-4">
               {[
                 { title: "Partner ecosystem design", desc: "Definition of partner types, roles, responsibilities, revenue models, and integration requirements for each distribution channel." },
-                { title: "Embedded journey architecture", desc: "Customer journey designs for embedded insurance within partner platforms — including trigger points, product presentation, purchase flow, and post-sale servicing." },
+                { title: "Embedded journey architecture", desc: "Customer journey designs for embedded insurance within partner platforms, including trigger points, product presentation, purchase flow, and post-sale servicing." },
                 { title: "Integration pattern definition", desc: "Technical architecture for API-based integration with partner systems, including data exchange models, authentication, and real-time processing requirements." },
                 { title: "Governance and compliance framework", desc: "Regulatory alignment checks, approval workflows, data handling agreements, and compliance controls specific to embedded distribution." },
-                { title: "Operating model recommendations", desc: "Clear definition of who does what — from lead handling and customer communication to claims processing and servicing responsibilities across insurer and partner." },
+                { title: "Operating model recommendations", desc: "Clear definition of who does what, from lead handling and customer communication to claims processing and servicing responsibilities across insurer and partner." },
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 flex-shrink-0" />
@@ -47,7 +47,7 @@ const EmbeddedInsurance = () => (
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <img src={imgVisual} alt="Embedded insurance ecosystem design" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
+            <img src={imgVisual} alt="Embedded insurance ecosystem" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
           </motion.div>
         </div>
       </div>

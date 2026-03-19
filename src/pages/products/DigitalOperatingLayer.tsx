@@ -1,8 +1,8 @@
 import { Layers, Workflow, Shield } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
-import imgSolves from "@/assets/visuals/v2-digital-infrastructure.jpg";
-import imgIncludes from "@/assets/visuals/v3-dol-workflows.jpg";
-import imgMatters from "@/assets/visuals/v3-dol-control.jpg";
+import imgSolves from "@/assets/visuals/v4-digital-infrastructure.jpg";
+import imgIncludes from "@/assets/visuals/v4-workflows.jpg";
+import imgMatters from "@/assets/visuals/v4-governance.jpg";
 
 const DigitalOperatingLayer = () => (
   <ProductPageTemplate
@@ -14,7 +14,7 @@ const DigitalOperatingLayer = () => (
     sections={[
       {
         heading: "Why insurers need a Digital Operating Layer",
-        content: "Most insurers today are constrained by aging core systems, fragmented data environments, manual workflows, and disconnected partner infrastructure. Replacing everything at once is expensive, disruptive, and risky. The Digital Operating Layer provides a smarter path forward — it allows insurers to modernize distribution, customer journeys, internal operations, partner integrations, and business intelligence without replacing their existing core systems. It acts as the connective layer between what exists and what the business needs next, enabling faster go-to-market, better digital experiences, and stronger operational control across the insurance value chain.",
+        content: "Most insurers today are held back by aging core systems, fragmented data, manual workflows, and disconnected partner infrastructure. Replacing everything at once is expensive, disruptive, and high-risk. The Digital Operating Layer provides a smarter path forward. It allows insurers to modernize distribution, customer journeys, internal operations, partner integrations, and business intelligence while preserving their existing core systems. Think of it as the connective layer between what you have today and what your business needs next.",
         icon: Layers,
         visual: "right",
         image: imgSolves,
@@ -22,12 +22,12 @@ const DigitalOperatingLayer = () => (
       {
         heading: "What the Digital Operating Layer enables",
         items: [
-          "Digital distribution across web, mobile app, embedded, and partner channels — enabling insurers to reach customers through the channels that matter most",
-          "Interactive customer onboarding, self-service portals, and digital purchase journeys that reduce friction and increase conversion",
-          "Workflow automation across underwriting, policy issuance, servicing, renewals, and claims — reducing manual effort and improving turnaround",
-          "API-based partner integration for distribution networks, embedded insurance ecosystems, and third-party service providers",
+          "Digital distribution across web, mobile, embedded, and partner channels so you reach customers where they actually are",
+          "Interactive customer onboarding, self-service portals, and digital purchase journeys that reduce friction and improve conversion",
+          "Workflow automation across underwriting, policy issuance, servicing, renewals, and claims to cut manual effort and improve turnaround",
+          "API-based partner integration for distribution networks, embedded insurance ecosystems, and third-party providers",
           "Configurable product setup that supports different insurance lines, coverage structures, and pricing models without hardcoded logic",
-          "Real-time operational visibility, performance dashboards, and AI-enabled decision support that turns business data into actionable intelligence",
+          "Real-time operational visibility, performance dashboards, and AI-enabled decision support",
         ],
         icon: Workflow,
         visual: "left",
@@ -35,17 +35,17 @@ const DigitalOperatingLayer = () => (
       },
       {
         heading: "Built for real insurer requirements",
-        content: "Unlike generic enterprise platforms that require heavy customization or force insurers into rigid structures, the Digital Operating Layer is designed to adapt around insurer-specific requirements. It supports business-specific workflows, product-level configuration, governance controls, multi-level approval logic, distribution variations, and insurer-specific operational structures. Whether an insurer needs to launch a new product line, onboard a distribution partner, restructure internal workflows, or add governance checkpoints, the platform supports it through configuration rather than custom development. This means faster deployment, lower risk, and a system that grows with the business instead of constraining it.",
+        content: "Unlike generic enterprise platforms that require heavy customization or lock insurers into rigid structures, the Digital Operating Layer adapts around insurer-specific needs. It supports business-specific workflows, product-level configuration, governance controls, multi-level approval logic, distribution variations, and insurer-specific operational structures. Whether you need to launch a new product line, onboard a distribution partner, restructure internal workflows, or add governance checkpoints, the platform supports it through configuration. That means faster deployment, lower risk, and a system that grows with your business instead of constraining it.",
         icon: Shield,
         visual: "right",
         image: imgMatters,
       },
     ]}
     faq={[
-      { q: "What is a Digital Operating Layer?", a: "A Digital Operating Layer is a modern technology layer that sits above existing core systems and connects distribution, workflows, governance, and intelligence into one structured digital environment — without requiring a full system replacement." },
-      { q: "Can the Digital Operating Layer work with legacy systems?", a: "Yes. It is designed specifically to work alongside existing core administration, policy management, and claims systems. It connects and extends them rather than replacing them." },
-      { q: "How is this different from buying a new core system?", a: "A core system replacement is expensive, slow, and high-risk. The Digital Operating Layer modernizes what matters most — customer journeys, workflows, integrations, and intelligence — while preserving existing investments." },
-      { q: "Is the Digital Operating Layer configurable for different insurance lines?", a: "Yes. It supports motor, health, life, general, specialty, and composite insurance lines through configurable product logic, workflow rules, and governance structures." },
+      { q: "What is a Digital Operating Layer?", a: "It is a modern technology layer that sits above existing core systems and connects distribution, workflows, governance, and intelligence into one structured digital environment, without requiring a full system replacement." },
+      { q: "Can it work with our existing legacy systems?", a: "Yes. It is designed specifically to work alongside existing core administration, policy management, and claims systems. It connects and extends them rather than replacing them." },
+      { q: "How is this different from buying a new core system?", a: "A core system replacement is expensive, slow, and high-risk. The Digital Operating Layer modernizes what matters most: customer journeys, workflows, integrations, and intelligence, while preserving your existing investments." },
+      { q: "Is it configurable for different insurance lines?", a: "Yes. It supports motor, health, life, general, specialty, and composite insurance lines through configurable product logic, workflow rules, and governance structures." },
     ]}
     relatedLinks={[
       { label: "Digital Spine", href: "/products/digital-spine" },

@@ -2,17 +2,17 @@ import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
-import imgVisual from "@/assets/visuals/v2-blueprint-plan.jpg";
+import imgVisual from "@/assets/visuals/v4-blueprint.jpg";
 
 const BlueprintStrategy = () => (
   <Layout>
-    <PageHero heading="Blueprint & Strategy Playbook" subheading="A structured discovery and planning engagement that maps your current landscape, defines priorities, and creates a clear digital transformation roadmap — before any platform build begins." primaryCta={{ label: "Book a Consultation", href: "/contact" }} />
+    <PageHero heading="Blueprint & Strategy Playbook" subheading="A structured discovery and planning engagement that maps your current landscape, defines priorities, and creates a clear digital transformation roadmap before any platform build begins." primaryCta={{ label: "Book a Consultation", href: "/contact" }} />
 
     <section className="section-spacing bg-accent/50">
       <div className="section-container max-w-3xl mx-auto text-center">
         <h2 className="text-2xl sm:text-3xl font-bold mb-6">What is the Blueprint & Strategy Playbook?</h2>
         <p className="text-muted-foreground leading-relaxed">
-          The Blueprint & Strategy Playbook is a focused consulting engagement designed for insurers who are planning digital transformation but need strategic clarity before committing to a full technology investment. Over 4 to 8 weeks, Ezee Technologies works with your leadership and operations teams to assess your current state, identify operational bottlenecks, define your target architecture, and create a phased implementation roadmap that reduces risk and maximizes impact.
+          This is a focused consulting engagement for insurers who are planning digital transformation but need strategic clarity before committing resources. Over 4 to 8 weeks, Ezee Technologies works with your leadership and operations teams to assess your current state, identify operational bottlenecks, define a target architecture, and create a phased implementation roadmap that reduces risk and maximizes impact.
         </p>
       </div>
     </section>
@@ -25,7 +25,7 @@ const BlueprintStrategy = () => (
             <ul className="space-y-4">
               {[
                 { title: "Current-state assessment", desc: "A comprehensive map of your existing business model, product structure, distribution channels, technology landscape, and operational pain points." },
-                { title: "Target architecture definition", desc: "A clear vision of where your digital infrastructure needs to go — including system architecture, integration approach, and capability priorities." },
+                { title: "Target architecture definition", desc: "A clear vision of where your digital infrastructure needs to go, including system architecture, integration approach, and capability priorities." },
                 { title: "Priority journey mapping", desc: "Identification and design of the most impactful customer and operational journeys to digitize first, based on business value and feasibility." },
                 { title: "Phase-wise delivery plan", desc: "A modular rollout sequence that breaks transformation into manageable phases with clear milestones, dependencies, and governance checkpoints." },
                 { title: "Governance framework", desc: "Recommendations for approval logic, compliance alignment, access controls, and operational oversight structures." },
@@ -47,7 +47,7 @@ const BlueprintStrategy = () => (
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <img src={imgVisual} alt="Blueprint & Strategy planning session" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
+            <img src={imgVisual} alt="Blueprint and strategy planning" className="w-full h-full object-cover rounded-2xl" loading="lazy" />
           </motion.div>
         </div>
       </div>

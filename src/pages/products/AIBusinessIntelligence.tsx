@@ -1,7 +1,7 @@
 import { Bot } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
 import imgSolves from "@/assets/visuals/v2-ai-automation.jpg";
-import imgIncludes from "@/assets/visuals/v3-ai-data-layers.jpg";
+import imgIncludes from "@/assets/visuals/v4-tech-dev.jpg";
 import imgMatters from "@/assets/visuals/v2-transformation.jpg";
 
 const AIBusinessIntelligence = () => (
@@ -9,12 +9,12 @@ const AIBusinessIntelligence = () => (
     seoTitle="AI-enabled Business Intelligence & Analytics for Insurance | Ezee Technologies"
     heading="AI-enabled Business Intelligence & Analytics"
     subheading="A decision-support layer that turns insurance operational data into actionable insight, performance visibility, and smarter business decisions across the entire value chain."
-    supportingLine="From static reports to dynamic intelligence — built for insurance leadership."
+    supportingLine="From static reports to dynamic intelligence. Built for insurance leadership."
     outcomeLine="See more clearly. Decide more confidently. Optimize more intelligently."
     sections={[
       {
         heading: "Why insurers need smarter intelligence",
-        content: "Insurers generate enormous volumes of operational, claims, sales, servicing, and distribution data every day — but most lack a clean, structured way to turn that data into usable insight. Traditional reporting tools produce static reports that arrive too late to influence decisions. Data sits in silos across departments. Leadership teams make strategic decisions based on incomplete pictures. This leads to slower decision-making, weak operational visibility, missed optimization opportunities, and an inability to identify trends before they become problems. AI-enabled Business Intelligence & Analytics closes this gap by providing a structured intelligence layer that connects to operational data sources and delivers real-time, actionable insight to the people who need it most.",
+        content: "Insurers generate enormous volumes of operational, claims, sales, servicing, and distribution data every day. But most lack a clean, structured way to turn that data into usable insight. Traditional reporting tools produce static reports that arrive too late to influence decisions. Data sits in silos across departments. Leadership teams make strategic decisions based on incomplete pictures. AI-enabled BI & Analytics closes this gap by providing a structured intelligence layer that connects to operational data sources and delivers real-time, actionable insight to the people who need it most.",
         icon: Bot,
         visual: "right",
         image: imgSolves,
@@ -36,7 +36,7 @@ const AIBusinessIntelligence = () => (
       },
       {
         heading: "From reporting to real intelligence",
-        content: "Better reporting is useful. Better insight is transformational. This product helps insurance leadership teams move from static, backward-looking reporting to dynamic operational intelligence — so decisions can be faster, sharper, and more grounded in actual business movement. When an underwriting team can see approval patterns in real time, when a claims leader can identify bottleneck trends before they escalate, when a distribution head can compare channel performance across geographies — that is the difference between managing reactively and leading proactively. AI-enabled BI & Analytics makes that shift possible.",
+        content: "Better reporting is useful. Better insight is transformational. This product helps insurance leadership teams move from static, backward-looking reporting to dynamic operational intelligence. When an underwriting team can see approval patterns in real time, when a claims leader can identify bottleneck trends before they escalate, when a distribution head can compare channel performance across geographies, that is the difference between managing reactively and leading proactively. AI-enabled BI & Analytics makes that shift possible.",
         icon: Bot,
         visual: "right",
         image: imgMatters,
@@ -44,8 +44,8 @@ const AIBusinessIntelligence = () => (
     ]}
     faq={[
       { q: "Does this replace our existing BI tools?", a: "It can work alongside existing tools or serve as the primary intelligence layer. It is designed to connect to insurance-specific data sources and deliver insurance-relevant insight." },
-      { q: "What kind of AI capabilities are included?", a: "The platform includes pattern recognition, anomaly detection, trend identification, and proactive insight generation — all trained on insurance operational data patterns." },
-      { q: "Can different teams see different dashboards?", a: "Yes. Dashboards are configurable by role, department, and access level — so leadership, operations, claims, and distribution teams each see what is most relevant to them." },
+      { q: "What kind of AI capabilities are included?", a: "Pattern recognition, anomaly detection, trend identification, and proactive insight generation, all trained on insurance operational data patterns." },
+      { q: "Can different teams see different dashboards?", a: "Yes. Dashboards are configurable by role, department, and access level so leadership, operations, claims, and distribution teams each see what is most relevant." },
     ]}
     relatedLinks={[
       { label: "Digital Operating Layer", href: "/products/digital-operating-layer" },
