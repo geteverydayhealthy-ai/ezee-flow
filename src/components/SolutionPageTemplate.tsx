@@ -4,6 +4,9 @@ import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
 import { usePageContent } from "@/hooks/usePageContent";
+import fallbackSolves from "@/assets/visuals/v8-fallback-challenge-clean.jpg";
+import fallbackIncludes from "@/assets/visuals/v8-fallback-capabilities-clean.jpg";
+import fallbackMatters from "@/assets/visuals/v8-fallback-impact-clean.jpg";
 
 interface SolutionPageProps {
   pageSlug: string;
@@ -67,9 +70,9 @@ const SolutionPageTemplate = ({
   const finalCtaHeading = get("cta", "heading", ctaHeading || "Let's talk about what you need");
   const finalCtaLabel = get("cta", "ctaLabel", ctaLabel || "Talk to our team");
 
-  const imgSolves = cmsImgSolves || images?.solves;
-  const imgIncludes = cmsImgIncludes || images?.includes;
-  const imgMatters = cmsImgMatters || images?.matters;
+  const imgSolves = cmsImgSolves || images?.solves || fallbackSolves;
+  const imgIncludes = cmsImgIncludes || images?.includes || fallbackIncludes;
+  const imgMatters = cmsImgMatters || images?.matters || fallbackMatters;
 
   const solvesPoints = splitIntoPoints(solves);
   const includesPoints = splitIntoPoints(includes);
@@ -93,11 +96,9 @@ const SolutionPageTemplate = ({
               </h2>
               {solvesPoints.length > 1 ? (
                 <div className="space-y-4 pt-2">
-                  {/* Lead paragraph */}
                   <p className="text-base text-muted-foreground leading-relaxed">
                     {solvesPoints[0]}.
                   </p>
-                  {/* Remaining as structured points */}
                   <ul className="space-y-3 pt-2">
                     {solvesPoints.slice(1).map((point, i) => (
                       <li key={i} className="flex items-start gap-3">
@@ -113,11 +114,7 @@ const SolutionPageTemplate = ({
             </motion.div>
 
             <motion.div {...scaleIn} className="rounded-2xl aspect-[4/3] overflow-hidden bg-muted/30">
-              {imgSolves ? (
-                <img src={imgSolves} alt={`${h} - What it solves`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
-              ) : (
-                <div className="bg-accent w-full h-full rounded-2xl" />
-              )}
+              <img src={imgSolves} alt={`${h} - What it solves`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
             </motion.div>
           </div>
         </div>
@@ -128,11 +125,7 @@ const SolutionPageTemplate = ({
         <div className="section-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-start">
             <motion.div {...scaleIn} className="rounded-2xl aspect-[4/3] overflow-hidden bg-card lg:order-1">
-              {imgIncludes ? (
-                <img src={imgIncludes} alt={`${h} - What it includes`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
-              ) : (
-                <div className="bg-card w-full h-full rounded-2xl" />
-              )}
+              <img src={imgIncludes} alt={`${h} - What it includes`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
             </motion.div>
 
             <motion.div {...fadeUp} className="lg:order-2 space-y-6">
@@ -200,11 +193,7 @@ const SolutionPageTemplate = ({
             </motion.div>
 
             <motion.div {...scaleIn} className="rounded-2xl aspect-[4/3] overflow-hidden bg-muted/30">
-              {imgMatters ? (
-                <img src={imgMatters} alt={`${h} - Why it matters`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
-              ) : (
-                <div className="bg-accent w-full h-full rounded-2xl" />
-              )}
+              <img src={imgMatters} alt={`${h} - Why it matters`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
             </motion.div>
           </div>
         </div>

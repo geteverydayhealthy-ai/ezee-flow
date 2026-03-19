@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import CTASection from "@/components/CTASection";
 import RelatedLinks from "@/components/RelatedLinks";
 import { usePageContent } from "@/hooks/usePageContent";
+import fallbackSectionImage from "@/assets/visuals/v8-fallback-challenge-clean.jpg";
 
 interface ProductPageProps {
   pageSlug: string;
@@ -92,13 +93,7 @@ const ProductPageTemplate = ({
               </div>
               <div className={`${section.visual === "left" ? "lg:order-1" : ""}`}>
                 <div className="rounded-2xl aspect-[4/3] overflow-hidden">
-                  {section.image ? (
-                    <img src={section.image} alt={section.heading} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
-                  ) : (
-                    <div className="bg-accent w-full h-full flex items-center justify-center rounded-2xl">
-                      {section.icon && <section.icon className="w-20 h-20 text-primary/30" />}
-                    </div>
-                  )}
+                  <img src={section.image || fallbackSectionImage} alt={section.heading} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
                 </div>
               </div>
             </motion.div>
