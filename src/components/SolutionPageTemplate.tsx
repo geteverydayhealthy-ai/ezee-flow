@@ -104,8 +104,8 @@ const SolutionPageTemplate = ({ pageSlug, heading, subheading, whatItSolves, wha
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {images?.matters ? (
-                <img src={images.matters} alt={`${h} - Why it matters`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
+              {imgMatters ? (
+                <img src={imgMatters} alt={`${h} - Why it matters`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
               ) : (
                 <div className="bg-card-sage w-full h-full rounded-2xl" />
               )}
