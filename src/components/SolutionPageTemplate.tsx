@@ -33,14 +33,14 @@ const fadeUp = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.5, ease: "easeOut" },
+  transition: { duration: 0.5, ease: "easeOut" as const },
 };
 
 const scaleIn = {
   initial: { opacity: 0, scale: 0.96 },
   whileInView: { opacity: 1, scale: 1 },
   viewport: { once: true },
-  transition: { duration: 0.6, ease: "easeOut" },
+  transition: { duration: 0.6, ease: "easeOut" as const },
 };
 
 const SolutionPageTemplate = ({
