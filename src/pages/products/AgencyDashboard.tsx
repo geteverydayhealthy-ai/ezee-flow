@@ -2,7 +2,7 @@ import { BarChart3 } from "lucide-react";
 import ProductPageTemplate from "@/components/ProductPageTemplate";
 import imgSolves from "@/assets/visuals/v5-agency-network.jpg";
 import imgIncludes from "@/assets/visuals/v5-agency-collab.jpg";
-import imgMatters from "@/assets/visuals/v5-agency-visibility.jpg";
+import imgMatters from "@/assets/visuals/v6-agency-visibility.jpg";
 
 const AgencyDashboard = () => (
   <ProductPageTemplate
