@@ -11,6 +11,8 @@ interface SolutionPageProps {
   whatItSolves: string;
   whatItIncludes: string;
   whyItMatters: string;
+  ctaHeading?: string;
+  ctaLabel?: string;
   images?: {
     solves?: string;
     includes?: string;
