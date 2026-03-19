@@ -76,14 +76,14 @@ const SolutionPageTemplate = ({ heading, subheading, whatItSolves, whatItInclude
             <p className="text-muted-foreground leading-relaxed">{whyItMatters}</p>
           </motion.div>
           <motion.div
-            className="rounded-2xl aspect-[4/3] overflow-hidden"
+            className="rounded-2xl aspect-[4/3] overflow-hidden bg-card p-2"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             {images?.matters ? (
-              <img src={images.matters} alt={`${heading} - Why it matters`} className="w-full h-full object-cover rounded-2xl" loading="lazy" />
+              <img src={images.matters} alt={`${heading} - Why it matters`} className="w-full h-full object-contain rounded-xl" loading="lazy" />
             ) : (
               <div className="bg-card-sage w-full h-full rounded-2xl" />
             )}
