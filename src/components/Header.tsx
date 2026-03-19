@@ -68,7 +68,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/50">
-      <div className="section-container flex items-center justify-between h-20">
+      <div className="section-container flex items-center justify-between h-18 sm:h-20">
         {/* Logo */}
          <Link to="/" className="flex-shrink-0">
           <img src={logo} alt="Ezee Technologies" className="h-14 sm:h-16 w-auto" />
